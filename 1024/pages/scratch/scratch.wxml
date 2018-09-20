@@ -1,0 +1,16 @@
+<import src="../../components/scratch/scratch.wxml" />
+<view class='bg-color'>
+  <image src='../../images/home_2.png'></image>
+</view>
+<view class='mask-box' style='width:{{windowWidth}}px;height:{{windowHeight}}px'>
+
+  
+</view>
+<view class='pop-win'>
+  <image class='pop-win-bg' src='../../images/card_bg4@2x.png'>
+    
+  </image>
+  <view class='scratch-wrap'>
+     <template is="scratch" data="{{scratch, isScroll}}"></template>
+  </view>
+</view>
