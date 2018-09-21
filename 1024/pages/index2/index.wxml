@@ -1,0 +1,25 @@
+<!--index.wxml-->
+<import src="../../components/scratch/scratch.wxml" />
+<view class="container">
+  <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+  <view>
+    <canvas bindtouchstart='bindtouchstart' bindtouchmove='bindtouchmove' bindtouchend='bindtouchend' style="width: 300px; height: 200px" canvas-id="firstCanvas"></canvas>
+  </view>
+  <view class="index">
+    <view class="index-hd">
+      <view class="index-desc">以下是小程序刮刮乐组件，组件样式仅供参考，开发者可根据自身需求自定义组件样式，具体属性参数详见开发文档。</view>
+    </view>
+
+    <template is="scratch" data="{{scratch, isScroll}}"></template>
+    <button bindtap="onStart">{{txt}}</button>
+  </view>
+  <view class="usermotto">
+    <text class="user-motto">{{motto}}</text>
+  </view>
+</view>

@@ -1,25 +1,99 @@
 <!--index.wxml-->
 <import src="../../components/scratch/scratch.wxml" />
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view>
-    <canvas bindtouchstart='bindtouchstart' bindtouchmove='bindtouchmove' bindtouchend='bindtouchend' style="width: 300px; height: 200px" canvas-id="firstCanvas"></canvas>
-  </view>
-  <view class="index">
-    <view class="index-hd">
-      <view class="index-desc">以下是小程序刮刮乐组件，组件样式仅供参考，开发者可根据自身需求自定义组件样式，具体属性参数详见开发文档。</view>
+<view class="container" style='width:{{windowWidth}};height:{{windowHeight}}'>
+  <view class='home-bg' style='width:{{windowWidth}};height:{{windowHeight}}'>
+    <image style='width:{{windowWidth}};height:{{windowHeight}}' src="../../images/home_2.png"></image>
+    <view class="userinfo">
+      <block>
+        <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      </block>
     </view>
-
-    <template is="scratch" data="{{scratch, isScroll}}"></template>
-    <button bindtap="onStart">{{txt}}</button>
+    <view class='bg-avatar-wrap'>
+      <image class='bg-avatar' src="../../images/bg_photo@2x.png"></image>
+    </view>
+    <view class='peng-title'>
+      <view class='peng-title-label'>对碰记录</view>
+      <view class='peng-percent'>1/9</view>
+    </view>
+    <view class='friends-dynamic'>
+      <view class='friends-dynamic-title'>好友动态</view>
+      <view class='friends-dynamic-info'>
+        <view>SAM对碰成4</view>
+        <view>小王子对碰成8</view>
+        <view>燕子南飞对碰成16</view>
+      </view>
+    </view>
+    <view class='navibar'>
+      <image src='../../images/icon_list@2x.png'></image>
+      <image src='../../images/icon_record@2x.png'></image>
+      <image src='../../images/icon_ld@2x.png'></image>
+    </view>
   </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
+  <view class='activity-bg'>
+    <view class='label-btn prize'>- 奖品 -</view>
+    <view class='activity-info prize-info'>
+      <image class='left-arrow' src='../../images/icon_left@2x.png'></image>
+      <view class='prize-info-item'>
+        <view>
+          <view class='prize-image-wrap'>
+            <image src='../../images/prize_10m@2x.png'></image>
+          </view>
+          <view>30元投资券</view>
+        </view>
+        <view>
+          <view class='prize-image-wrap'>
+            <image src='../../images/prize_10m@2x.png'></image>
+          </view>
+          <view>30元投资券</view>
+        </view>
+        <view>
+          <view class='prize-image-wrap'>
+            <image src='../../images/prize_10m@2x.png'></image>
+          </view>
+          <view>30元投资券</view>
+        </view>
+        <view>
+          <view class='prize-image-wrap'>
+            <image src='../../images/prize_10m@2x.png'></image>
+          </view>
+          <view>30元投资券</view>
+        </view>
+      </view>
+      <image class='right-arrow' src='../../images/icon_right@2x.png'></image>
+    </view>
+    <view class='label-btn'>- 规则 -</view>
+    <view class='activity-info rule-info'>
+      <text>玩家需要做到是分享所有的数字卡片，找到 好友一起合成新卡片升级，得到升级奖励。 同时玩家尽可能在小组内更早的争取达到 1024，得到1024的可以参与抽奖活动。</text>
+
+    </view>
+    <view class='label-btn'>- 其他活动 -</view>
+    <view class='activity-info others'>
+      <view>
+        <image src='../../images/1@2x.png'></image>
+      </view>
+      <view>
+        <image src='../../images/2@2x.png'></image>
+      </view>
+    </view>
+  </view>
+  <view class='download-software'>
+    <view>
+      <image style='width:278rpx;height:72rpx;' src='../../images/home_lujinsuo@2x.png'></image>
+    </view>
+    <view>
+      <image class='download-lujinsuo' src='../../images/btn_yellow02@2x.png'>
+        <text class='download-lujinsuo-text'>下载陆金所</text>
+      </image>
+    </view>
+  </view>
+
+  <view class='mask-box {{showMask ? "show" : "hide"}}' style='width:{{windowWidth}}px;height:{{windowHeight}}px'></view>
+  <view class='pop-win {{showScratch ? "show" : "hide"}}'>
+    <image class='pop-win-bg' src='../../images/card_bg4@2x.png'>
+
+    </image>
+    <view class='scratch-wrap'>
+      <template is="scratch" data="{{scratch, isScroll}}"></template>
+    </view>
   </view>
 </view>

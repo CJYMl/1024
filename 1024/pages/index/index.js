@@ -1,7 +1,6 @@
 //index.js
 //获取应用实例
 import Scratch from "../../components/scratch/scratch.js"
-
 const app = getApp()
 
 Page({
@@ -9,7 +8,9 @@ Page({
     motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    windowWidth: "",
+    windowHeight: ""
   },
   //事件处理函数
   bindViewTap: function() {
@@ -18,33 +19,10 @@ Page({
     })
   },
   onLoad: function() {
-    this.scratch = new Scratch(this, {
-            canvasWidth: 197,
-            canvasHeight: 72,
-            imageResource: 'https://misc.aotu.io/pfan123/wx/placeholder.png',
-            maskColor: 'red',
-            r: 4,
-            awardTxt: '中大奖',
-            awardTxtColor: '#3985ff',
-            awardTxtFontSize: '24px',
-            callback: () => {
-                wx.showModal({
-                    title: '提示',
-                    content: `您中奖了`,
-                    showCancel: false,
-                    success: res => {
-                        this.scratch.reset()
-                        if (res.confirm) {
-                            console.log('用户点击确定')
-                        } else if (res.cancel) {
-                            console.log('用户点击取消')
-                        }
-                    }
-                })
-            }
-        })
-    //this.createLuckyCard()
+    this.initScratch()
+    this.setSystemSize()
     if (app.globalData.userInfo) {
+      console.log(app.globalData.userInfo)
       this.setData({
         userInfo: app.globalData.userInfo,
         hasUserInfo: true
@@ -79,28 +57,43 @@ Page({
       hasUserInfo: true
     })
   },
-  createLuckyCard() {
-    this.ctx = wx.createCanvasContext('firstCanvas')
-    this.ctx.fillStyle = "red";
-    this.ctx.fillRect(0, 0, 300, 200);
-    this.ctx.draw(true)
+  setSystemSize: function() {
+    let {
+      windowHeight,
+      windowWidth
+    } = wx.getSystemInfoSync()
+    console.log(windowHeight, windowWidth)
+    this.setData({
+      windowHeight: windowHeight + "px",
+      windowWidth: windowWidth + "px"
+    })
   },
-  bindtouchstart: function(e) {
-
-
-  },
-  bindtouchmove: function(e) {
-    var evt = e.touches[0]
-    console.log(evt["x"], evt["y"])
-    //this.ctx.beginPath();
-    this.ctx.fillStyle = 'transparent';
-    //this.ctx.globalCompositeOperation = "destination-out";
-    this.ctx.arc(evt["x"], evt["y"], 10, 0, 2 * Math.PI);
-    this.ctx.fill();
-    this.ctx.draw(true);
-
-  },
-  bindtouchend: function(e) {
-
+  initScratch: function() {
+    this.scratch = new Scratch(this, {
+      canvasWidth: 230,
+      canvasHeight: 100,
+      imageResource: '../../images/card_img03@2x.png',
+      maskColor: 'red',
+      r: 4,
+      awardTxt: '中大奖',
+      awardTxtColor: '#ccc',
+      awardTxtFontSize: '24px',
+      callback: () => {
+        wx.showModal({
+          title: '提示',
+          content: `您中奖了`,
+          showCancel: false,
+          success: res => {
+            //this.scratch.reset()
+            if (res.confirm) {
+              console.log('用户点击确定')
+            } else if (res.cancel) {
+              console.log('用户点击取消')
+            }
+          }
+        })
+      }
+    })
+    this.scratch.start()
   }
 })
