@@ -10,7 +10,9 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     windowWidth: "",
-    windowHeight: ""
+    windowHeight: "",
+    showMask:true,
+    showScratch:true
   },
   //事件处理函数
   bindViewTap: function() {
@@ -95,5 +97,8 @@ Page({
       }
     })
     this.scratch.start()
+  },
+  closePopWin:function(){
+    
   }
 })

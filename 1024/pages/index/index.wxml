@@ -88,7 +88,7 @@
   </view>
 
   <view class='mask-box {{showMask ? "show" : "hide"}}' style='width:{{windowWidth}}px;height:{{windowHeight}}px'></view>
-  <view class='pop-win {{showScratch ? "show" : "hide"}}'>
+  <view class='pop-win scratch {{showScratch ? "show" : "hide"}}'>
     <image class='pop-win-bg' src='../../images/card_bg4@2x.png'>
 
     </image>
