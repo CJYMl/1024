@@ -2,7 +2,7 @@
 <import src="../../components/scratch/scratch.wxml" />
 <view class="container" style='width:{{windowWidth}};height:{{windowHeight}}'>
   <view class='home-bg' style='width:{{windowWidth}};height:{{windowHeight}}'>
-    <image style='width:{{windowWidth}};height:{{windowHeight}}' src="../../images/home_2.png"></image>
+    <image style='width:{{windowWidth}};height:{{windowHeight}}' src="../../images/home_2@2x.png"></image>
     <view class="userinfo">
       <block>
         <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>

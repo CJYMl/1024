@@ -185,7 +185,9 @@
   border: 1px solid #f3c96a;
   border-radius: 3px;
 }
-
+.prize-info-item > view{
+  width: 25%
+}
 .prize-image-wrap  image {
   width: 108rpx;
   height: 50rpx;
@@ -200,6 +202,8 @@
 
 .prize-info {
   height: 186rpx;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .rule-info {
@@ -242,6 +246,7 @@
   transform: translate(-50%, -50%);
   font-size: 17px;
   color: #fff;
+  width: 100%
 }
 
 .download-software {
