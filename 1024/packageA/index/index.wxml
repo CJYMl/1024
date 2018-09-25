@@ -1,2 +1,3 @@
 <!--packageA/index/index.wxml-->
 <text>packageA/index/index.wxml</text>
+<image style='width:{{windowWidth}}px;height:{{windowHeight}}px' src="../../images/home_2@2x.png"></image>

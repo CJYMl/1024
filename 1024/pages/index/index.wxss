@@ -317,9 +317,11 @@
 .close-btn {
   text-align: right;
   bottom: 10px;
-  position: absolute;
   width: 100%;
   top: -22rpx;
+  right: 20rpx;
+  box-sizing: border-box;
+  padding-right: 20rpx;
 }
 
 .auth-group {
@@ -476,7 +478,7 @@ button[plain] {
   position: absolute;
   width: 440rpx;
   height: 100rpx;
-  top: 22%;
+  top: 29%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -485,7 +487,7 @@ button[plain] {
   position: absolute;
   width: 440rpx;
   height: 100rpx;
-  top: 40%;
+  top: 47%;
   left: 50%;
   transform: translate(-50%, -50%);
   display: flex;
@@ -520,11 +522,11 @@ button[plain] {
 }
 .tip-info-dialog{
   position: absolute;
-  top: 60%;
+  top: 65%;
   left: 50%;
   color: #921D17;
   font-size: 17px;
-  width: 500rpx;
+  width: 700rpx;
   text-align: center;
   transform: translate(-50%, -50%);
 }
@@ -535,15 +537,30 @@ button[plain] {
 }
 .tip-info-group{
   position: absolute;
-  top: 80%;
+  top: 85%;
   left: 50%;
+  width: 90%;
   color: #921D17;
   font-size: 17px;
-  width: 500rpx;
   text-align: center;
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center
+}
+
+.tip-info-group-no-peng{
+  position: absolute;
+  top: 85%;
+  left: 50%;
+  width: 90%;
+  color: #921D17;
+  font-size: 17px;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   align-items: center
 }

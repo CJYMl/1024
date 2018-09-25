@@ -13,9 +13,11 @@ Page({
     windowHeight: "",
     showMask:true,
     showScratch:false,
-    showAuth:false,
+    showAuth:true,
     showRecord:false,
-    showPengTip:true
+    showPengTip:false,
+    showScratchTip:false,
+    isCanPeng:false  //是否能对碰
   },
   //事件处理函数
   bindViewTap: function() {
@@ -24,6 +26,9 @@ Page({
     })
   },
   onLoad: function() {
+    wx.redirectTo({
+      url: '../guide1/guide1',
+    })
     this.setSystemSize()
     this.initScratch()
     if (app.globalData.userInfo) {
@@ -108,11 +113,14 @@ Page({
     this.scratch.start()
   },
   closePopWin:function(){
+    console.log("dsds")
     this.setData({
       showMask: false,
       showScratch: false,
       showAuth:false,
-      showRecord:false
+      showRecord:false,
+      showPengTip:false,
+      showScratchTip:false
     })
   },
   authHandle:function(){
@@ -121,6 +129,14 @@ Page({
   showRecordHandle:function(){
     this.setData({
       showRecord: true
+    })
+  },
+  startScratchHandle:function(){
+   this.closePopWin();
+   console.log("fsdf")
+    this.setData({
+      showScratch:true,
+      showMask:true
     })
   }
 })
