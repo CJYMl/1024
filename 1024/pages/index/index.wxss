@@ -281,9 +281,14 @@
   height: 668rpx;
 }
 
+.pop-win-record-bg {
+  width: 690rpx;
+  height: 1048rpx;
+}
+
 .scratch-wrap {
   position: absolute;
-  top: 44%;
+  top: 48%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -293,6 +298,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 100;
 }
 
 .show {
@@ -303,6 +309,241 @@
   display: none;
 }
 
-.scratch {
-  z-index: 100;
+.scratch-title > image {
+  width: 300rpx;
+  height: 74rpx;
+}
+
+.close-btn {
+  text-align: right;
+  bottom: 10px;
+  position: absolute;
+  width: 100%;
+  top: -22rpx;
+}
+
+.auth-group {
+  box-sizing: border-box;
+  padding: 0 40rpx;
+  position: absolute;
+  bottom: 20rpx;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 54rpx;
+}
+
+.auth-refuse {
+  color: #7f3a3b;
+  font-size: 15px;
+  margin-bottom: 10rpx;
+}
+
+.auth-refuse-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.auth-refuse-line {
+  width: 144rpx;
+  height: 10rpx;
+}
+
+.auth-sure {
+  width: 302rpx;
+  height: 94rpx;
+}
+
+.auth-sure-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.auth-sure-wrap > text {
+  position: absolute;
+  color: #fff;
+  font-size: 15px;
+}
+
+.auth-agreement {
+  position: absolute;
+  color: #b96f1f;
+  font-size: 15px;
+  width: 416rpx;
+  line-height: 60rpx;
+  top: 32%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.auth-btn {
+  position: absolute;
+  width: 202rpx;
+  height: 94rpx;
+  color: #fff;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+button[plain] {
+  border: 0px solid #353535;
+  color: #fff;
+}
+
+.reacors-list-title {
+  position: absolute;
+  top: 0;
+  height: 90rpx;
+  line-height: 90rpx;
+  text-align: center;
+  color: #be7066;
+  width: 100%;
+}
+
+.record-list-wrap {
+  height: 938rpx;
+  position: absolute;
+  top: 90rpx;
+  box-sizing: border-box;
+  width: 100%;
+  padding-bottom: 26rpx;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.record-list-item-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.record-list-item {
+  width: 608rpx;
+  height: 134rpx;
+  border-radius: 12px;
+  border: 1px solid #faecd3;
+  margin-top: 20rpx;
+  padding: 0 40rpx;
+  box-sizing: border-box;
+  background: #faecd3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.record-item-avatar {
+  width: 104rpx;
+  height: 104rpx;
+  border-radius: 52rpx;
+  border: 1px solid #e5c7a5;
+  margin-right: ;
+}
+
+.record-list-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.record-item-avatar >image {
+  width: 104rpx;
+  height: 104rpx;
+}
+
+.record-item-name {
+  font-size: 17px;
+  color: #b96f1f;
+  font-weight: 500;
+}
+
+.record-item-date {
+  font-size: 14px;
+  color: #b96f1f;
+}
+
+.record-item-points {
+  font-size: 18px;
+  color: #b96f1f;
+}
+
+.tree {
+  position: absolute;
+  width: 440rpx;
+  height: 100rpx;
+  top: 22%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.tip-info {
+  position: absolute;
+  width: 440rpx;
+  height: 100rpx;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tip-info-mine {
+  width: 104rpx;
+  height: 104rpx;
+  border-radius: 5px;
+  text-align: center;
+  line-height: 104rpx;
+  color: #713533;
+  background: #fcde7e;
+}
+
+.tip-info-enemy {
+  width: 104rpx;
+  height: 104rpx;
+  border-radius: 5px;
+  text-align: center;
+  line-height: 104rpx;
+  color: #713533;
+  background: #fcde7e;
+}
+
+.tip-info-VS {
+  color: #fb7a45;
+  font-size: 17px;
+}
+.tip-info-dialog{
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  color: #921D17;
+  font-size: 17px;
+  width: 500rpx;
+  text-align: center;
+  transform: translate(-50%, -50%);
+}
+.tip-info-name{
+  font-size: 16px;
+  color: #921D17;
+  text-align: center
+}
+.tip-info-group{
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  color: #921D17;
+  font-size: 17px;
+  width: 500rpx;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center
 }

@@ -1,0 +1,23 @@
+<!--pages/user/user.wxml-->
+<view class='user-modal'>
+  <view class="section">
+    <input maxlength="10" placeholder="请输入手机号" />
+  </view>
+  <view class="section validate">
+    <input maxlength="10" placeholder="输入动态码" />
+    <view class='validCode'>
+      获取动态码
+    </view>
+  </view>
+  <view class="section validate">
+    <input maxlength="10" placeholder="输入动态码" />
+    <view class='validCode'>
+      获取动态码
+    </view>
+  </view>
+
+  <view class="section validate">
+    <view class='validate-user'>
+      立即验证用户</view>
+  </view>
+</view>

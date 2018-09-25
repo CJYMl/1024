@@ -1,8 +1,8 @@
 <!--index.wxml-->
 <import src="../../components/scratch/scratch.wxml" />
-<view class="container" style='width:{{windowWidth}};height:{{windowHeight}}'>
-  <view class='home-bg' style='width:{{windowWidth}};height:{{windowHeight}}'>
-    <image style='width:{{windowWidth}};height:{{windowHeight}}' src="../../images/home_2@2x.png"></image>
+<view class="container" style='overflow:auto;-webkit-overflow-scrolling: touch;width:{{windowWidth}}px;height:{{windowHeight}}px'>
+  <view class='home-bg' style='width:{{windowWidth}}px;height:{{windowHeight}}px'>
+    <image style='width:{{windowWidth}}px;height:{{windowHeight}}px' src="../../images/home_2@2x.png"></image>
     <view class="userinfo">
       <block>
         <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
@@ -12,7 +12,7 @@
       <image class='bg-avatar' src="../../images/bg_photo@2x.png"></image>
     </view>
     <view class='peng-title'>
-      <view class='peng-title-label'>对碰记录</view>
+      <view class='peng-title-label' bindtap='showRecordHandle'>对碰记录</view>
       <view class='peng-percent'>1/9</view>
     </view>
     <view class='friends-dynamic'>
@@ -88,12 +88,201 @@
   </view>
 
   <view class='mask-box {{showMask ? "show" : "hide"}}' style='width:{{windowWidth}}px;height:{{windowHeight}}px'></view>
-  <view class='pop-win scratch {{showScratch ? "show" : "hide"}}'>
-    <image class='pop-win-bg' src='../../images/card_bg4@2x.png'>
+
+  <view class='pop-win {{showScratch ? "show" : "hide"}}'>
+    <view class='close-btn' bindtap='closePopWin'>
+      <image style='width:80rpx;height:80rpx;' src='../../images/icon_close@2x.png'></image>
+    </view>
+    <image class='pop-win-bg' src='../../images/card_bg1@2x.png'>
 
     </image>
     <view class='scratch-wrap'>
       <template is="scratch" data="{{scratch, isScroll}}"></template>
+    </view>
+  </view>
+
+
+  <view class='pop-win {{showAuth ? "show" : "hide"}}'>
+    <image class='pop-win-bg' src='../../images/accredit_bg01@2x.png'></image>
+    <view class='auth-agreement'>
+      <view>亲爱的用户：</view>
+      <view style='text-indent:30px;'>
+        陆金所1024需要您的授权 才能更好的为您服务哦， 拜托您了！
+      </view>
+    </view>
+    <view class='auth-group'>
+      <view class='auth-refuse-wrap'>
+        <view class='auth-refuse' bindtap='closePopWin'>再想想</view>
+        <image class='auth-refuse-line' src='../../images/btn_line@2x.png'></image>
+      </view>
+      <view class='auth-sure-wrap' bindtap='authHandle'>
+        <image class='auth-sure' src='../../images/btn_yellow03@2x.png'></image>
+        <button plain='true' class='auth-btn' open-type="getUserInfo" bindgetuserinfo="getUserInfo">好，授权吧</button>
+      </view>
+    </view>
+  </view>
+
+
+  <view class='pop-win {{showRecord ? "show" : "hide"}}'>
+    <image class='pop-win-record-bg' src='../../images/record_bg@2x.png'></image>
+
+    <view class='reacors-list-title' bindtap='closePopWin'>对碰记录</view>
+    <view class='record-list-wrap'>
+      <view class='record-list-item-wrap'>
+        <view class='record-list-item'>
+          <view class='record-list-info'>
+            <view class='record-item-avatar'>
+              <image src='../../images/img_car@2x.png'></image>
+            </view>
+            <view>
+              <view class='record-item-name'>Sam</view>
+              <view class='record-item-date'>2018.08.31</view>
+            </view>
+          </view>
+
+          <view class='record-item-points'>256</view>
+        </view>
+      </view>
+      <view class='record-list-item-wrap'>
+        <view class='record-list-item'>
+          <view class='record-list-info'>
+            <view class='record-item-avatar'>
+              <image src='../../images/img_car@2x.png'></image>
+            </view>
+            <view>
+              <view class='record-item-name'>Sam</view>
+              <view class='record-item-date'>2018.08.31</view>
+            </view>
+          </view>
+
+          <view class='record-item-points'>256</view>
+        </view>
+      </view>
+      <view class='record-list-item-wrap'>
+        <view class='record-list-item'>
+          <view class='record-list-info'>
+            <view class='record-item-avatar'>
+              <image src='../../images/img_car@2x.png'></image>
+            </view>
+            <view>
+              <view class='record-item-name'>Sam</view>
+              <view class='record-item-date'>2018.08.31</view>
+            </view>
+          </view>
+
+          <view class='record-item-points'>256</view>
+        </view>
+      </view>
+      <view class='record-list-item-wrap'>
+        <view class='record-list-item'>
+          <view class='record-list-info'>
+            <view class='record-item-avatar'>
+              <image src='../../images/img_car@2x.png'></image>
+            </view>
+            <view>
+              <view class='record-item-name'>Sam</view>
+              <view class='record-item-date'>2018.08.31</view>
+            </view>
+          </view>
+
+          <view class='record-item-points'>256</view>
+        </view>
+      </view>
+      <view class='record-list-item-wrap'>
+        <view class='record-list-item'>
+          <view class='record-list-info'>
+            <view class='record-item-avatar'>
+              <image src='../../images/img_car@2x.png'></image>
+            </view>
+            <view>
+              <view class='record-item-name'>Sam</view>
+              <view class='record-item-date'>2018.08.31</view>
+            </view>
+          </view>
+
+          <view class='record-item-points'>256</view>
+        </view>
+      </view>
+      <view class='record-list-item-wrap'>
+        <view class='record-list-item'>
+          <view class='record-list-info'>
+            <view class='record-item-avatar'>
+              <image src='../../images/img_car@2x.png'></image>
+            </view>
+            <view>
+              <view class='record-item-name'>Sam</view>
+              <view class='record-item-date'>2018.08.31</view>
+            </view>
+          </view>
+
+          <view class='record-item-points'>256</view>
+        </view>
+      </view>
+      <view class='record-list-item-wrap'>
+        <view class='record-list-item'>
+          <view class='record-list-info'>
+            <view class='record-item-avatar'>
+              <image src='../../images/img_car@2x.png'></image>
+            </view>
+            <view>
+              <view class='record-item-name'>Sam</view>
+              <view class='record-item-date'>2018.08.31</view>
+            </view>
+          </view>
+
+          <view class='record-item-points'>256</view>
+        </view>
+      </view>
+      <view class='record-list-item-wrap'>
+        <view class='record-list-item'>
+          <view class='record-list-info'>
+            <view class='record-item-avatar'>
+              <image src='../../images/img_car@2x.png'></image>
+            </view>
+            <view>
+              <view class='record-item-name'>Sam</view>
+              <view class='record-item-date'>2018.08.31</view>
+            </view>
+          </view>
+
+          <view class='record-item-points'>256</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class='pop-win {{showPengTip ? "show" : "hide"}}'>
+    <view class='close-btn' bindtap='closePopWin'>
+      <image style='width:80rpx;height:80rpx;' src='../../images/icon_close@2x.png'></image>
+    </view>
+    <image class='pop-win-bg' src='../../images/record_bg6@2x.png'>
+
+    </image>
+    <view class='tip-info-wrap'>
+      <image class='tree' src='../../images/share_img_trees@2x.png'></image>
+      <view class='tip-info'>
+        <view>
+          <view class='tip-info-mine'>
+            256
+          </view>
+          <view class='tip-info-name'>Sam</view>
+        </view>
+        <view class='tip-info-VS'>VS</view>
+        <view>
+          <view class='tip-info-enemy'>1024</view>
+          <view class='tip-info-name'>小王子</view>
+        </view>
+      </view>
+      <view class='tip-info-dialog'>您有好友发来邀请，是否对碰？</view>
+    </view>
+    <view class='tip-info-group'>
+      <view>
+        
+        <view>碰</view>
+      </view>
+      <view>
+        <view>哼，就是不碰</view>
+      </view>
     </view>
   </view>
 </view>

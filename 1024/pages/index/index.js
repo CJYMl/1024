@@ -12,7 +12,10 @@ Page({
     windowWidth: "",
     windowHeight: "",
     showMask:true,
-    showScratch:true
+    showScratch:false,
+    showAuth:false,
+    showRecord:false,
+    showPengTip:true
   },
   //事件处理函数
   bindViewTap: function() {
@@ -21,8 +24,8 @@ Page({
     })
   },
   onLoad: function() {
-    this.initScratch()
     this.setSystemSize()
+    this.initScratch()
     if (app.globalData.userInfo) {
       console.log(app.globalData.userInfo)
       this.setData({
@@ -58,22 +61,28 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
+    // wx.reLaunch({
+    //   url: '../guide1/guide1',
+    // })
+    // wx.navigateTo({
+    //   url: '/packageA/index/index',
+    // })
   },
   setSystemSize: function() {
     let {
       windowHeight,
       windowWidth
     } = wx.getSystemInfoSync()
-    console.log(windowHeight, windowWidth)
     this.setData({
-      windowHeight: windowHeight + "px",
-      windowWidth: windowWidth + "px"
+      windowHeight: windowHeight,
+      windowWidth: windowWidth
     })
   },
   initScratch: function() {
+    let { windowHeight, windowWidth} = this.data
     this.scratch = new Scratch(this, {
-      canvasWidth: 230,
-      canvasHeight: 100,
+      canvasWidth: windowWidth  * 0.72,
+      canvasHeight: windowHeight * 0.2,
       imageResource: '../../images/card_img03@2x.png',
       maskColor: 'red',
       r: 4,
@@ -99,6 +108,19 @@ Page({
     this.scratch.start()
   },
   closePopWin:function(){
-    
+    this.setData({
+      showMask: false,
+      showScratch: false,
+      showAuth:false,
+      showRecord:false
+    })
+  },
+  authHandle:function(){
+    this.closePopWin()
+  },
+  showRecordHandle:function(){
+    this.setData({
+      showRecord: true
+    })
   }
 })

@@ -1,6 +1,6 @@
 <import src="../../components/scratch/scratch.wxml" />
 <view class='bg-color'>
-  <image src='../../images/home_2.png'></image>
+  <image src='../../images/home_2@2x.png'></image>
 </view>
 <view class='mask-box' style='width:{{windowWidth}}px;height:{{windowHeight}}px'>
 
