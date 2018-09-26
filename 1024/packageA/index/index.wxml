@@ -87,7 +87,11 @@
     </view>
   </view>
 
-  <view class='mask-box {{showMask ? "show" : "hide"}}' style='width:{{windowWidth}}px;height:{{windowHeight}}px'></view>
+  <view class='share-box' bindtap='shareHandle'>
+
+  </view>
+
+  <view catchtouchmove='true' class='mask-box {{showMask ? "show" : "hide"}}' style='width:{{windowWidth}}px;height:{{windowHeight}}px'></view>
   <!--刮奖-->
   <view class='pop-win {{showScratch ? "show" : "hide"}}'>
     <view class='close-btn' bindtap='closePopWin' style='position:absolute'>
@@ -297,6 +301,91 @@
 
   </view>
 
+
+  <!--分享-->
+  <view class='pop-win {{showShare ? "show" : "hide"}}'>
+    <view class='reacors-list-title' style='top:10rpx'>分享</view>
+    <image bindtap='closePopWin' style='width:80rpx;height:80rpx;position:absolute;top:-10rpx;left:-4rpx' src='../../images/icon_return@2x.png'></image>
+    <image class='pop-win-bg' src='../../images/share_bg0@2x.png'>
+
+    </image>
+    <view class='tip-info-wrap'>
+
+      <view class='tip-info' style='justify-content:center;color:#BE7066;font-size:100px;font-weight:bold;top:48%'>
+        <view>2</view>
+      </view>
+      <view class='tip-info-dialog' style='font-size:15px;top:65%;'>对碰数字，获得奖励升级</view>
+    </view>
+    <view>
+
+      <view class='tip-info-group' style='top:81%'>
+        <view style='position:relative'>
+          <image style='width:308rpx;height:94rpx;' src='../../images/btn_yellow01@2x.png'></image>
+          <view style='position:absolute;top:50%;left:50%;width:90%;transform: translate(-50%, -50%);font-size:16px;color:#fff;display:flex;justify-content:center;align-items:center}'>
+            <view>
+              <image style='width:40rpx;height:40rpx;' src='../../images/icon_moments@2x.png'></image>
+            </view>
+            <view>分享到朋友圈</view>
+          </view>
+
+        </view>
+        <view style='position:relative'>
+          <image style='width:308rpx;height:94rpx;' src='../../images/btn_green01@2x.png'></image>
+          <view style='position:absolute;top:50%;left:50%;width:90%;transform: translate(-50%, -50%);font-size:16px;color:#fff;display:flex;justify-content:center;align-items:center}'>
+            <view>
+              <image style='width:40rpx;height:40rpx;' src='../../images/icon_wechat@2x.png'></image>
+            </view>
+            <view>分享到微信</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+  </view>
+
+  <!--下载陆金所-->
+  <view class='pop-win {{showDownload ? "show" : "hide"}}'>
+    <view class='reacors-list-title'>下载陆金所</view>
+    <image bindtap='closePopWin' style='width:80rpx;height:80rpx;position:absolute;top:-10rpx;left:-4rpx' src='../../images/icon_return@2x.png'></image>
+    <image class='pop-win-bg' src='../../images/bg@2x.png'>
+
+    </image>
+    <view class='tip-info-wrap'>
+
+      <view style='color:#BE7066;font-size:17px;font-weight:bold;top:25%;position:absolute;width:80%;padding:0 10%'>
+        <view style='margin-top:26rpx;display:flex;justify-content:space-between;'>
+          <view>
+            <text>1.点击 </text>
+            <text style='color:#FB7A45'>“右上角三个点”</text>
+          </view>
+          <view>
+            <image style='width:116rpx;height:80rpx;' src='../../images/download_img01@2x.png'></image>
+          </view>
+        </view>
+        <view style='margin-top:-20rpx;display:flex;align-items:center'>
+          <view>
+            <text>2.点击 </text>
+            <text style='color:#FB7A45'>“相关公众号”</text>
+          </view>
+          <view>
+            <image style='width:66rpx;height:66rpx' src='../../images/download_img02@2x.png'></image>
+          </view>
+        </view>
+        <view style='margin-top:26rpx;'>
+          <text>3.选择下方 </text>
+          <text style='color:#FB7A45'>“陆金所理财精选”</text>
+        </view>
+        <view style='display:flex;justify-content:center;margin-top:28rpx;'>
+          <view style='width:500rpx;height:66rpx;line-height:66rpx;text-align:center;background:#fff;border:1px solid #B5B5B5;border-radius:17px;color:#333'>陆金所理财精选</view>
+        </view>
+        <view style='margin-top:26rpx;'>
+          <text>4.点击 </text>
+          <text style='color:#FB7A45'>“个人理财”，“下载陆金所APP”。</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
   <!--刮奖提示-->
   <view class='pop-win {{showScratchTip ? "show" : "hide"}}'>
     <view class='close-btn' bindtap='closePopWin'>
@@ -331,7 +420,7 @@
         <image style='width:584rpx;height:100rpx;' src='../../images/tip_failure@2x.png'>
         </image>
       </view>
-      <view style='text-align:center;font-size:15px;color:#fff'>您与好友已经碰过，寻找其他好友吧</view>
+      <view style='text-align:center;font-size:15px;color:#fff;text-shadow:1px 1px 1px #050E87; '>您与好友已经碰过，寻找其他好友吧</view>
       <view style='text-align:center'>
         <image style='width:300rpx;height:280rpx;background:red' src='../../images/tip_failure@2x.png'>
         </image>
@@ -358,7 +447,7 @@
         <image style='width:348rpx;height:114rpx;' src='../../images/tip_succes@2x.png'>
         </image>
       </view>
-      <view style='text-align:center;font-size:15px;color:#fff'>对碰数字 获得升级奖励</view>
+      <view style='text-align:center;font-size:15px;color:#fff;text-shadow:1px 1px 1px #921D17;'>对碰数字 获得升级奖励</view>
       <view style='text-align:center;position:relative'>
         <image style='width:326rpx;height:326rpx;' src='../../images/img_ray@2x.png'>
         </image>
@@ -388,7 +477,7 @@
     </view>
   </view>
 
-   <!--砸金蛋-->
+  <!--砸金蛋碎了-->
   <view class='pop-win {{showEggAward? "show" : "hide"}}'>
     <view class='close-btn' bindtap='closePopWin'>
       <image style='width:80rpx;height:80rpx;' src='../../images/icon_close@2x.png'></image>
@@ -399,15 +488,17 @@
     <view style='position:absolute;top:42%;left:50%;transform: translate(-50%, -50%);font-size:18px;color:#FC4F33;width:90%;text-align:center'>恭喜您，中奖了</view>
     <view style='position:absolute;top:50%;left:50%;transform: translate(-50%, -50%);font-size:20px;color:#A85147;width:90%;text-align:center'>iPhoneX （64G）</view>
     <view style='position:absolute;top:61%;left:50%;transform: translate(-50%, -50%);font-size:20px;color:#A85147;width:90%;text-align:center'>
-       <image style='width:302rpx;height:94rpx' src='../../images/btn_red2@2x.png'></image>
-       
+      <image style='width:302rpx;height:94rpx' src='../../images/btn_red2@2x.png'></image>
+
     </view>
 
-<view style='position:absolute;top:61%;left:50%;transform: translate(-50%, -50%);font-size:20px;color:#A85147;width:90%;text-align:center'>
-        <view style='font-size:15px;color:#fff'>立即领取</view>       
+    <view style='position:absolute;top:61%;left:50%;transform: translate(-50%, -50%);font-size:20px;color:#A85147;width:90%;text-align:center'>
+      <view style='font-size:15px;color:#fff'>立即领取</view>
     </view>
     <view style='position:absolute;top:79%;left:50%;width:90%;color:#921D17;font-size:17px;text-align:center;transform:translate(-50%, -50%);'>
-      <view style='width:100%;text-align:right;font-size:15px;color:#fff'>您还有一份刮刮卡待领取,<text style='color:#FFE245'>去挂卡～</text></view>
+      <view style='width:100%;text-align:right;font-size:15px;color:#fff'>您还有一份刮刮卡待领取,
+        <text style='color:#FFE245'>去挂卡～</text>
+      </view>
     </view>
   </view>
 </view>

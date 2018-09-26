@@ -20,7 +20,9 @@ Page({
     showPengFail:false,
     showPengSuccess:false,
     showEgg:false,
-    showEggAward:true,
+    showEggAward:false,
+    showShare:false,
+    showDownload:true,
     isCanPeng: false  //是否能对碰
   },
   //事件处理函数
@@ -124,7 +126,9 @@ Page({
       showScratchTip: false,
       showPengFail:false,
       showEgg:false,
+      showShare:false,
       showEggAward:false,
+      showDownload:false,
       showPengSuccess:false
     })
   },
@@ -133,14 +137,32 @@ Page({
   },
   showRecordHandle: function () {
     this.setData({
+      showMask:true,
       showRecord: true
     })
   },
   startScratchHandle: function () {
     this.closePopWin();
-    console.log("fsdf")
     this.setData({
       showScratch: true,
+      showMask: true
+    })
+  },
+  onShareAppMessage: function (res) {
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: '碰碰1024',
+      path: '/packageA/index/index',
+      imageUrl: '../../images/share@2x.png',
+    }
+  },
+  //点击分享
+  shareHandle:function(){
+    this.setData({
+      showShare: true,
       showMask: true
     })
   }

@@ -23,7 +23,13 @@
   width: 132rpx;
   height: 132rpx;
 }
-
+.share-box{
+  width: 100%;
+  position: absolute;
+  top:60%;
+  height: 300rpx;
+  
+}
 .userinfo {
   position: absolute;
   left: 0;
@@ -485,7 +491,7 @@ button[plain] {
 
 .tip-info {
   position: absolute;
-  width: 440rpx;
+  width: 90%;
   height: 100rpx;
   top: 47%;
   left: 50%;
