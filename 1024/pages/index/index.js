@@ -1,142 +1,68 @@
-//index.js
-//获取应用实例
-import Scratch from "../../components/scratch/scratch.js"
-const app = getApp()
-
+// pages/guide/guide.js
 Page({
+
+  /**
+   * 页面的初始数据
+   */
   data: {
-    motto: 'Hello World',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    windowWidth: "",
-    windowHeight: "",
-    showMask:true,
-    showScratch:false,
-    showAuth:true,
-    showRecord:false,
-    showPengTip:false,
-    showScratchTip:false,
-    isCanPeng:false  //是否能对碰
+
   },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+     wx.reLaunch({
+       url: '../../packageA/index/index',
+     })
   },
-  onLoad: function() {
-    wx.redirectTo({
-      url: '../guide1/guide1',
-    })
-    this.setSystemSize()
-    this.initScratch()
-    if (app.globalData.userInfo) {
-      console.log(app.globalData.userInfo)
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse) {
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
-    }
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+
   },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
-    // wx.reLaunch({
-    //   url: '../guide1/guide1',
-    // })
-    // wx.navigateTo({
-    //   url: '/packageA/index/index',
-    // })
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+
   },
-  setSystemSize: function() {
-    let {
-      windowHeight,
-      windowWidth
-    } = wx.getSystemInfoSync()
-    this.setData({
-      windowHeight: windowHeight,
-      windowWidth: windowWidth
-    })
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+
   },
-  initScratch: function() {
-    let { windowHeight, windowWidth} = this.data
-    this.scratch = new Scratch(this, {
-      canvasWidth: windowWidth  * 0.72,
-      canvasHeight: windowHeight * 0.2,
-      imageResource: '../../images/card_img03@2x.png',
-      maskColor: 'red',
-      r: 4,
-      awardTxt: '中大奖',
-      awardTxtColor: '#ccc',
-      awardTxtFontSize: '24px',
-      callback: () => {
-        wx.showModal({
-          title: '提示',
-          content: `您中奖了`,
-          showCancel: false,
-          success: res => {
-            //this.scratch.reset()
-            if (res.confirm) {
-              console.log('用户点击确定')
-            } else if (res.cancel) {
-              console.log('用户点击取消')
-            }
-          }
-        })
-      }
-    })
-    this.scratch.start()
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+
   },
-  closePopWin:function(){
-    console.log("dsds")
-    this.setData({
-      showMask: false,
-      showScratch: false,
-      showAuth:false,
-      showRecord:false,
-      showPengTip:false,
-      showScratchTip:false
-    })
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+
   },
-  authHandle:function(){
-    this.closePopWin()
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+
   },
-  showRecordHandle:function(){
-    this.setData({
-      showRecord: true
-    })
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+
   },
-  startScratchHandle:function(){
-   this.closePopWin();
-   console.log("fsdf")
-    this.setData({
-      showScratch:true,
-      showMask:true
-    })
-  }
 })
