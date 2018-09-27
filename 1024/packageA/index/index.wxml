@@ -1,8 +1,8 @@
 <!--index.wxml-->
 <import src="../../components/scratch/scratch.wxml" />
 <view class="container" style='overflow:auto;-webkit-overflow-scrolling: touch;width:{{windowWidth}}px;height:{{windowHeight}}px'>
-  <view class='home-bg' style='width:{{windowWidth}}px;height:{{windowHeight}}px'>
-    <image style='width:{{windowWidth}}px;height:{{windowHeight}}px' src="../../images/home_2@2x.png"></image>
+  <view class='home-bg' style='width:{{windowWidth}}px;height:{{windowHeight*0.9}}px'>
+    <image style='width:{{windowWidth}}px;height:{{windowHeight*0.9}}px' src="../../images/home_2@2x.png"></image>
     <view class="userinfo">
       <block>
         <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
@@ -28,6 +28,7 @@
       <image src='../../images/icon_record@2x.png'></image>
       <image src='../../images/icon_ld@2x.png'></image>
     </view>
+    <view class='share-box' bindtap='shareHandle'></view>
   </view>
   <view class='activity-bg'>
     <view class='label-btn prize'>- 奖品 -</view>
@@ -81,19 +82,17 @@
       <image style='width:278rpx;height:72rpx;' src='../../images/home_lujinsuo@2x.png'></image>
     </view>
     <view>
-      <image class='download-lujinsuo' src='../../images/btn_yellow02@2x.png'>
+      <image class='download-lujinsuo' src='../../images/btn_yellow02@2x.png' bindtap='downloadHandle'>
         <text class='download-lujinsuo-text'>下载陆金所</text>
       </image>
     </view>
   </view>
 
-  <view class='share-box' bindtap='shareHandle'>
 
-  </view>
 
   <view catchtouchmove='true' class='mask-box {{showMask ? "show" : "hide"}}' style='width:{{windowWidth}}px;height:{{windowHeight}}px'></view>
   <!--刮奖-->
-  <view class='pop-win {{showScratch ? "show" : "hide"}}'>
+  <view catchtouchmove='true' class='pop-win {{showScratch ? "show" : "hide"}}'>
     <view class='close-btn' bindtap='closePopWin' style='position:absolute'>
       <image style='width:80rpx;height:80rpx;' src='../../images/icon_close@2x.png'></image>
     </view>
@@ -106,7 +105,7 @@
   </view>
 
   <!--授权-->
-  <view class='pop-win {{showAuth ? "show" : "hide"}}'>
+  <view catchtouchmove='true' class='pop-win {{showAuth ? "show" : "hide"}}'>
     <image class='pop-win-bg' src='../../images/accredit_bg01@2x.png'></image>
     <view class='auth-agreement'>
       <view>亲爱的用户：</view>
@@ -127,12 +126,13 @@
   </view>
 
   <!--对碰记录-->
-  <view class='pop-win {{showRecord ? "show" : "hide"}}'>
+  <view   class='pop-win {{showRecord ? "show" : "hide"}}'>
     <image class='pop-win-record-bg' src='../../images/record_bg@2x.png'></image>
 
     <view class='reacors-list-title' bindtap='closePopWin'>对碰记录</view>
     <view class='record-list-wrap'>
-      <view class='record-list-item-wrap'>
+      <view style='margin-top:20rpx;position:relative'>
+        <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
         <view class='record-list-item'>
           <view class='record-list-info'>
             <view class='record-item-avatar'>
@@ -146,8 +146,12 @@
 
           <view class='record-item-points'>256</view>
         </view>
+
       </view>
-      <view class='record-list-item-wrap'>
+
+      <view style='margin-top:20rpx;position:relative'>
+        <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
+
         <view class='record-list-item'>
           <view class='record-list-info'>
             <view class='record-item-avatar'>
@@ -161,8 +165,12 @@
 
           <view class='record-item-points'>256</view>
         </view>
+
       </view>
-      <view class='record-list-item-wrap'>
+
+      <view style='margin-top:20rpx;position:relative'>
+        <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
+
         <view class='record-list-item'>
           <view class='record-list-info'>
             <view class='record-item-avatar'>
@@ -176,8 +184,11 @@
 
           <view class='record-item-points'>256</view>
         </view>
+
       </view>
-      <view class='record-list-item-wrap'>
+      <view style='margin-top:20rpx;position:relative'>
+        <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
+
         <view class='record-list-item'>
           <view class='record-list-info'>
             <view class='record-item-avatar'>
@@ -191,8 +202,11 @@
 
           <view class='record-item-points'>256</view>
         </view>
+
       </view>
-      <view class='record-list-item-wrap'>
+      <view style='margin-top:20rpx;position:relative'>
+        <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
+
         <view class='record-list-item'>
           <view class='record-list-info'>
             <view class='record-item-avatar'>
@@ -206,8 +220,11 @@
 
           <view class='record-item-points'>256</view>
         </view>
+
       </view>
-      <view class='record-list-item-wrap'>
+      <view style='margin-top:20rpx;position:relative'>
+        <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
+
         <view class='record-list-item'>
           <view class='record-list-info'>
             <view class='record-item-avatar'>
@@ -221,8 +238,11 @@
 
           <view class='record-item-points'>256</view>
         </view>
+
       </view>
-      <view class='record-list-item-wrap'>
+      <view style='margin-top:20rpx;position:relative'>
+        <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
+
         <view class='record-list-item'>
           <view class='record-list-info'>
             <view class='record-item-avatar'>
@@ -236,26 +256,36 @@
 
           <view class='record-item-points'>256</view>
         </view>
+
       </view>
-      <view class='record-list-item-wrap'>
-        <view class='record-list-item'>
-          <view class='record-list-info'>
-            <view class='record-item-avatar'>
-              <image src='../../images/img_car@2x.png'></image>
+    </view>
+    <view catchtouchmove='true' style='position:absolute;top:72%;display:flex;justify-content:center;width:100%;'>
+
+      <view style='height:328rpx;text-align:center'>
+        <image style='width:438rpx;height:14rpx;' src='../../images/img_line@2x.png'></image>
+        <view style='margin-top:30rpx;position:relative'>
+          <image style='width:610rpx;height:134rpx;' src='../../images/record_bg2@2x.png'></image>
+
+          <view class='record-list-item'>
+            <view class='record-list-info'>
+              <view class='record-item-avatar'>
+                <image src='../../images/img_car@2x.png'></image>
+              </view>
+              <view>
+                <view class='record-item-name'>小王子</view>
+              </view>
             </view>
-            <view>
-              <view class='record-item-name'>Sam</view>
-              <view class='record-item-date'>2018.08.31</view>
-            </view>
+
+            <view class='record-item-points'>256</view>
           </view>
 
-          <view class='record-item-points'>256</view>
         </view>
       </view>
     </view>
+
   </view>
   <!--对碰邀请-->
-  <view class='pop-win {{showPengTip ? "show" : "hide"}}'>
+  <view catchtouchmove='true' class='pop-win {{showPengTip ? "show" : "hide"}}'>
     <view class='close-btn' bindtap='closePopWin'>
       <image style='width:80rpx;height:80rpx;' src='../../images/icon_close@2x.png'></image>
     </view>
@@ -303,7 +333,7 @@
 
 
   <!--分享-->
-  <view class='pop-win {{showShare ? "show" : "hide"}}'>
+  <view catchtouchmove='true' class='pop-win {{showShare ? "show" : "hide"}}'>
     <view class='reacors-list-title' style='top:10rpx'>分享</view>
     <image bindtap='closePopWin' style='width:80rpx;height:80rpx;position:absolute;top:-10rpx;left:-4rpx' src='../../images/icon_return@2x.png'></image>
     <image class='pop-win-bg' src='../../images/share_bg0@2x.png'>
@@ -344,10 +374,10 @@
   </view>
 
   <!--下载陆金所-->
-  <view class='pop-win {{showDownload ? "show" : "hide"}}'>
+  <view catchtouchmove='true' class='pop-win {{showDownload ? "show" : "hide"}}'>
     <view class='reacors-list-title'>下载陆金所</view>
     <image bindtap='closePopWin' style='width:80rpx;height:80rpx;position:absolute;top:-10rpx;left:-4rpx' src='../../images/icon_return@2x.png'></image>
-    <image class='pop-win-bg' src='../../images/bg@2x.png'>
+    <image class='pop-win-bg' src='../../images/bg@2x.png' style='width:700rpx;height:734rpx;'>
 
     </image>
     <view class='tip-info-wrap'>
@@ -387,7 +417,7 @@
   </view>
 
   <!--刮奖提示-->
-  <view class='pop-win {{showScratchTip ? "show" : "hide"}}'>
+  <view catchtouchmove='true' class='pop-win {{showScratchTip ? "show" : "hide"}}'>
     <view class='close-btn' bindtap='closePopWin'>
       <image style='width:80rpx;height:80rpx;' src='../../images/icon_close@2x.png'></image>
     </view>
@@ -411,7 +441,7 @@
   </view>
 
   <!--碰过了页面-->
-  <view class='pop-win {{showPengFail ? "show" : "hide"}}'>
+  <view catchtouchmove='true' class='pop-win {{showPengFail ? "show" : "hide"}}'>
     <view class='close-btn' bindtap='closePopWin'>
       <image style='width:80rpx;height:80rpx;' src='../../images/icon_close@2x.png'></image>
     </view>
@@ -438,7 +468,7 @@
 
 
   <!--对碰成功-->
-  <view class='pop-win {{showPengSuccess ? "show" : "hide"}}'>
+  <view catchtouchmove='true' class='pop-win {{showPengSuccess ? "show" : "hide"}}'>
     <view class='close-btn' bindtap='closePopWin'>
       <image style='width:80rpx;height:80rpx;' src='../../images/icon_close@2x.png'></image>
     </view>
@@ -465,7 +495,7 @@
   </view>
 
   <!--砸金蛋-->
-  <view class='pop-win {{showEgg? "show" : "hide"}}'>
+  <view catchtouchmove='true' class='pop-win {{showEgg? "show" : "hide"}}'>
     <view class='close-btn' bindtap='closePopWin'>
       <image style='width:80rpx;height:80rpx;' src='../../images/icon_close@2x.png'></image>
     </view>
@@ -478,7 +508,7 @@
   </view>
 
   <!--砸金蛋碎了-->
-  <view class='pop-win {{showEggAward? "show" : "hide"}}'>
+  <view catchtouchmove='true' class='pop-win {{showEggAward? "show" : "hide"}}'>
     <view class='close-btn' bindtap='closePopWin'>
       <image style='width:80rpx;height:80rpx;' src='../../images/icon_close@2x.png'></image>
     </view>

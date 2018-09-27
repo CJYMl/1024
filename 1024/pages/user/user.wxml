@@ -1,15 +1,18 @@
 <!--pages/user/user.wxml-->
 <view class='user-modal'>
   <view class="section">
+  <image src='../../images/icon_phone@2x.png' style='width:40rpx;height:40rpx;left:38rpx;top:25rpx;;position:absolute;'></image>
     <input maxlength="10" placeholder="请输入手机号" />
   </view>
   <view class="section validate">
+  <image src='../../images/icon_phone1@2x.png' style='width:40rpx;height:40rpx;left:38rpx;top:25rpx;;position:absolute;'></image>
     <input maxlength="10" placeholder="输入动态码" />
     <view class='validCode'>
       获取动态码
     </view>
   </view>
   <view class="section validate">
+  <image src='../../images/icon_phone2@2x.png' style='width:40rpx;height:40rpx;left:38rpx;top:25rpx;;position:absolute;'></image>
     <input maxlength="10" placeholder="输入动态码" />
     <view class='validCode'>
       获取动态码

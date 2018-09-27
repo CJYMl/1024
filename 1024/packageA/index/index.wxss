@@ -23,13 +23,14 @@
   width: 132rpx;
   height: 132rpx;
 }
-.share-box{
+
+.share-box {
   width: 100%;
   position: absolute;
-  top:60%;
+  top: 56%;
   height: 300rpx;
-  
 }
+
 .userinfo {
   position: absolute;
   left: 0;
@@ -415,7 +416,10 @@ button[plain] {
 }
 
 .record-list-wrap {
-  height: 920rpx;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 690rpx;
   position: absolute;
   top: 90rpx;
   box-sizing: border-box;
@@ -432,14 +436,12 @@ button[plain] {
 }
 
 .record-list-item {
+  position: absolute;
+  top: 0;
   width: 608rpx;
   height: 134rpx;
-  border-radius: 12px;
-  border: 1px solid #faecd3;
-  margin-top: 20rpx;
   padding: 0 40rpx;
   box-sizing: border-box;
-  background: #faecd3;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -450,7 +452,7 @@ button[plain] {
   height: 104rpx;
   border-radius: 52rpx;
   border: 1px solid #e5c7a5;
-  margin-right: ;
+  margin-right: 20rpx;
 }
 
 .record-list-info {
@@ -526,47 +528,50 @@ button[plain] {
   color: #fb7a45;
   font-size: 17px;
 }
-.tip-info-dialog{
+
+.tip-info-dialog {
   position: absolute;
   top: 65%;
   left: 50%;
-  color: #921D17;
+  color: #921d17;
   font-size: 17px;
   width: 700rpx;
   text-align: center;
   transform: translate(-50%, -50%);
 }
-.tip-info-name{
+
+.tip-info-name {
   font-size: 16px;
-  color: #921D17;
-  text-align: center
+  color: #921d17;
+  text-align: center;
 }
-.tip-info-group{
+
+.tip-info-group {
   position: absolute;
   top: 85%;
   left: 50%;
   width: 90%;
-  color: #921D17;
+  color: #921d17;
   font-size: 17px;
   text-align: center;
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center
+  align-items: center;
 }
 
-.tip-info-group-no-peng{
+.tip-info-group-no-peng {
   position: absolute;
   top: 85%;
   left: 50%;
   width: 90%;
-  color: #921D17;
+  color: #921d17;
   font-size: 17px;
   text-align: center;
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center
+  align-items: center;
 }

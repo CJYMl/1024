@@ -13,7 +13,7 @@ Page({
     windowHeight: "",
     showMask: true,
     showScratch: false,
-    showAuth: false,
+    showAuth: true,
     showRecord: false,
     showPengTip: false,
     showScratchTip: false,
@@ -22,7 +22,7 @@ Page({
     showEgg:false,
     showEggAward:false,
     showShare:false,
-    showDownload:true,
+    showDownload:false,
     isCanPeng: false  //是否能对碰
   },
   //事件处理函数
@@ -163,6 +163,13 @@ Page({
   shareHandle:function(){
     this.setData({
       showShare: true,
+      showMask: true
+    })
+  },
+  //下载陆金所
+  downloadHandle:function(){
+    this.setData({
+      showDownload: true,
       showMask: true
     })
   }
