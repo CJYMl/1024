@@ -5,16 +5,26 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    windowHeight:"",
+    windowWidth:""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+     this.setSystemSize()
   },
-
+  setSystemSize: function () {
+    let {
+      windowHeight,
+      windowWidth
+    } = wx.getSystemInfoSync()
+    this.setData({
+      windowHeight: windowHeight,
+      windowWidth: windowWidth
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

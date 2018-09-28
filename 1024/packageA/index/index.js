@@ -23,6 +23,8 @@ Page({
     showEggAward:false,
     showShare:false,
     showDownload:false,
+    showPrizeRecord:false,
+    showRanking:false,
     isCanPeng: false  //是否能对碰
   },
   //事件处理函数
@@ -31,7 +33,14 @@ Page({
       url: '../logs/logs'
     })
   },
-  onLoad: function () {
+  onLoad: function (options) {
+    if (wx.getStorageSync("hasVisit")) {
+      this.setData({
+        showMask:false,
+        showAuth:false
+      })
+    }
+    console.log(options)
     this.setSystemSize()
     this.initScratch()
     if (app.globalData.userInfo) {
@@ -69,9 +78,9 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
-    // wx.reLaunch({
-    //   url: '../guide1/guide1',
-    // })
+    wx.reLaunch({
+      url: '../../pages/guide1/guide1',
+    })
     // wx.navigateTo({
     //   url: '/packageA/index/index',
     // })
@@ -116,7 +125,6 @@ Page({
     this.scratch.start()
   },
   closePopWin: function () {
-    console.log("dsds")
     this.setData({
       showMask: false,
       showScratch: false,
@@ -129,7 +137,9 @@ Page({
       showShare:false,
       showEggAward:false,
       showDownload:false,
-      showPengSuccess:false
+      showPengSuccess:false,
+      showPrizeRecord:false,
+      showRanking:false
     })
   },
   authHandle: function () {
@@ -139,6 +149,18 @@ Page({
     this.setData({
       showMask:true,
       showRecord: true
+    })
+  },
+  showPrizeRecordHandle:function(){
+    this.setData({
+      showMask: true,
+      showPrizeRecord: true
+    })
+  },
+  showRankingHandle:function(){
+    this.setData({
+      showMask: true,
+      showRanking: true
     })
   },
   startScratchHandle: function () {
@@ -168,6 +190,7 @@ Page({
   },
   //下载陆金所
   downloadHandle:function(){
+    console.log("ds")
     this.setData({
       showDownload: true,
       showMask: true

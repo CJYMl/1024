@@ -1,2 +1,6 @@
-<!--pages/guide2/guide2.wxml-->
-<text>pages/guide2/guide2.wxml</text>
+<!--pages/guide/guide.wxml-->
+<view class="container" style='overflow:auto;-webkit-overflow-scrolling: touch;width:{{windowWidth}}px;height:{{windowHeight}}px'>
+  <view class='home-bg' style='width:{{windowWidth}}px;height:{{windowHeight}}px'>
+    <image bindtap="toHome" style='width:{{windowWidth}}px;height:{{windowHeight}}px' src="../../images/guide2.jpg"></image>   
+  </view>
+</view>

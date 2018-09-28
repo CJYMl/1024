@@ -24,8 +24,8 @@
       </view>
     </view>
     <view class='navibar'>
-      <image src='../../images/icon_list@2x.png'></image>
-      <image src='../../images/icon_record@2x.png'></image>
+      <image bindtap='showRankingHandle' src='../../images/icon_list@2x.png'></image>
+      <image bindtap='showPrizeRecordHandle' src='../../images/icon_record@2x.png'></image>
       <image src='../../images/icon_ld@2x.png'></image>
     </view>
     <view class='share-box' bindtap='shareHandle'></view>
@@ -90,445 +90,726 @@
 
 
 
-  <view catchtouchmove='true' class='mask-box {{showMask ? "show" : "hide"}}' style='width:{{windowWidth}}px;height:{{windowHeight}}px'></view>
-  <!--刮奖-->
-  <view catchtouchmove='true' class='pop-win {{showScratch ? "show" : "hide"}}'>
-    <view class='close-btn' bindtap='closePopWin' style='position:absolute'>
-      <image style='width:80rpx;height:80rpx;' src='../../images/icon_close@2x.png'></image>
-    </view>
-    <image class='pop-win-bg' src='../../images/card_bg1@2x.png'>
 
-    </image>
-    <view class='scratch-wrap'>
-      <template is="scratch" data="{{scratch, isScroll}}"></template>
+</view>
+
+<view catchtouchmove='true' class='mask-box {{showMask ? "show" : "hide"}}' style='width:{{windowWidth}}px;height:{{windowHeight}}px'></view>
+<!--刮奖-->
+<view catchtouchmove='true' class='pop-win {{showScratch ? "show" : "hide"}}'>
+  <view class='close-btn' bindtap='closePopWin' style='position:absolute'>
+    <image style='width:80rpx;height:80rpx;' src='../../images/icon_close@2x.png'></image>
+  </view>
+  <image class='pop-win-bg' src='../../images/card_bg1@2x.png'>
+
+  </image>
+  <view class='scratch-wrap'>
+    <template is="scratch" data="{{scratch, isScroll}}"></template>
+  </view>
+</view>
+
+<!--授权-->
+<view catchtouchmove='true' class='pop-win {{showAuth ? "show" : "hide"}}'>
+  <image class='pop-win-bg' src='../../images/accredit_bg01@2x.png'></image>
+  <view class='auth-agreement'>
+    <view>亲爱的用户：</view>
+    <view style='text-indent:30px;'>
+      陆金所1024需要您的授权 才能更好的为您服务哦， 拜托您了！
+    </view>
+  </view>
+  <view class='auth-group'>
+    <view class='auth-refuse-wrap'>
+      <view class='auth-refuse' bindtap='closePopWin'>再想想</view>
+      <image class='auth-refuse-line' src='../../images/btn_line@2x.png'></image>
+    </view>
+    <view class='auth-sure-wrap' bindtap='authHandle'>
+      <image class='auth-sure' src='../../images/btn_yellow03@2x.png'></image>
+      <button plain='true' class='auth-btn' open-type="getUserInfo" bindgetuserinfo="getUserInfo">好，授权吧</button>
+    </view>
+  </view>
+</view>
+
+<!--对碰记录-->
+<view class='pop-win {{showRecord ? "show" : "hide"}}'>
+  <image class='pop-win-record-bg' src='../../images/record_bg@2x.png'></image>
+
+  <view class='reacors-list-title'>对碰记录</view>
+  <image bindtap='closePopWin' style='width:80rpx;height:80rpx;position:absolute;top:-10rpx;left:-4rpx' src='../../images/icon_return@2x.png'></image>
+  <view class='record-list-wrap'>
+    <view style='margin-top:20rpx;position:relative'>
+      <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
+      <view class='record-list-item'>
+        <view class='record-list-info'>
+          <view class='record-item-avatar'>
+            <image src='../../images/img_car@2x.png'></image>
+          </view>
+          <view>
+            <view class='record-item-name'>Sam</view>
+            <view class='record-item-date'>2018.08.31</view>
+          </view>
+        </view>
+
+        <view class='record-item-points'>256</view>
+      </view>
+
+    </view>
+
+    <view style='margin-top:20rpx;position:relative'>
+      <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
+
+      <view class='record-list-item'>
+        <view class='record-list-info'>
+          <view class='record-item-avatar'>
+            <image src='../../images/img_car@2x.png'></image>
+          </view>
+          <view>
+            <view class='record-item-name'>Sam</view>
+            <view class='record-item-date'>2018.08.31</view>
+          </view>
+        </view>
+
+        <view class='record-item-points'>256</view>
+      </view>
+
+    </view>
+
+    <view style='margin-top:20rpx;position:relative'>
+      <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
+
+      <view class='record-list-item'>
+        <view class='record-list-info'>
+          <view class='record-item-avatar'>
+            <image src='../../images/img_car@2x.png'></image>
+          </view>
+          <view>
+            <view class='record-item-name'>Sam</view>
+            <view class='record-item-date'>2018.08.31</view>
+          </view>
+        </view>
+
+        <view class='record-item-points'>256</view>
+      </view>
+
+    </view>
+    <view style='margin-top:20rpx;position:relative'>
+      <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
+
+      <view class='record-list-item'>
+        <view class='record-list-info'>
+          <view class='record-item-avatar'>
+            <image src='../../images/img_car@2x.png'></image>
+          </view>
+          <view>
+            <view class='record-item-name'>Sam</view>
+            <view class='record-item-date'>2018.08.31</view>
+          </view>
+        </view>
+
+        <view class='record-item-points'>256</view>
+      </view>
+
+    </view>
+    <view style='margin-top:20rpx;position:relative'>
+      <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
+
+      <view class='record-list-item'>
+        <view class='record-list-info'>
+          <view class='record-item-avatar'>
+            <image src='../../images/img_car@2x.png'></image>
+          </view>
+          <view>
+            <view class='record-item-name'>Sam</view>
+            <view class='record-item-date'>2018.08.31</view>
+          </view>
+        </view>
+
+        <view class='record-item-points'>256</view>
+      </view>
+
+    </view>
+    <view style='margin-top:20rpx;position:relative'>
+      <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
+
+      <view class='record-list-item'>
+        <view class='record-list-info'>
+          <view class='record-item-avatar'>
+            <image src='../../images/img_car@2x.png'></image>
+          </view>
+          <view>
+            <view class='record-item-name'>Sam</view>
+            <view class='record-item-date'>2018.08.31</view>
+          </view>
+        </view>
+
+        <view class='record-item-points'>256</view>
+      </view>
+
+    </view>
+    <view style='margin-top:20rpx;position:relative'>
+      <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
+
+      <view class='record-list-item'>
+        <view class='record-list-info'>
+          <view class='record-item-avatar'>
+            <image src='../../images/img_car@2x.png'></image>
+          </view>
+          <view>
+            <view class='record-item-name'>Sam</view>
+            <view class='record-item-date'>2018.08.31</view>
+          </view>
+        </view>
+
+        <view class='record-item-points'>256</view>
+      </view>
+
+    </view>
+  </view>
+  <view catchtouchmove='true' style='position:absolute;top:72%;display:flex;justify-content:center;width:100%;'>
+
+    <view style='height:328rpx;text-align:center'>
+      <image style='width:438rpx;height:14rpx;' src='../../images/img_line@2x.png'></image>
+      <view style='margin-top:30rpx;position:relative'>
+        <image style='width:610rpx;height:134rpx;' src='../../images/record_bg2@2x.png'></image>
+
+        <view class='record-list-item'>
+          <view class='record-list-info'>
+            <view class='record-item-avatar'>
+              <image src='../../images/img_car@2x.png'></image>
+            </view>
+            <view>
+              <view class='record-item-name'>小王子</view>
+            </view>
+          </view>
+
+          <view class='record-item-points'>256</view>
+        </view>
+
+      </view>
     </view>
   </view>
 
-  <!--授权-->
-  <view catchtouchmove='true' class='pop-win {{showAuth ? "show" : "hide"}}'>
-    <image class='pop-win-bg' src='../../images/accredit_bg01@2x.png'></image>
-    <view class='auth-agreement'>
-      <view>亲爱的用户：</view>
-      <view style='text-indent:30px;'>
-        陆金所1024需要您的授权 才能更好的为您服务哦， 拜托您了！
+</view>
+
+
+<!--中奖纪录-->
+<view class='pop-win {{showPrizeRecord ? "show" : "hide"}}'>
+  <image class='pop-win-record-bg' src='../../images/bg00@2x.png'></image>
+
+  <view class='reacors-list-title'>中奖记录</view>
+  <image bindtap='closePopWin' style='width:80rpx;height:80rpx;position:absolute;top:-10rpx;left:-4rpx' src='../../images/icon_return@2x.png'></image>
+  <view class='record-list-wrap'>
+    <view style='margin-top:20rpx;position:relative'>
+      <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
+      <view class='record-list-item'>
+        <view class='record-item-points'>
+          <view class='record-item-name' style='font-size:18px;color:#B96F1F;font-weight:bold'>Sam</view>
+          <view class='record-item-date'>2018.08.31</view>
+        </view>
+        <view class='record-list-info'>
+          <view style='position:relative'>
+            <image style='width:200rpx;height:94rpx;' src='../../images/btn_green04@2x.png'></image>
+            <view style='width:100%;position:absolute;font-size:15px;color:#fff;top:0;height:94rpx;line-height:94rpx;text-align:center'>立即查看</view>
+          </view>
+        </view>
       </view>
+
     </view>
-    <view class='auth-group'>
-      <view class='auth-refuse-wrap'>
-        <view class='auth-refuse' bindtap='closePopWin'>再想想</view>
-        <image class='auth-refuse-line' src='../../images/btn_line@2x.png'></image>
+    <view style='margin-top:20rpx;position:relative'>
+      <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
+      <view class='record-list-item'>
+        <view class='record-item-points'>
+          <view class='record-item-name' style='font-size:18px;color:#B96F1F;font-weight:bold'>Sam</view>
+          <view class='record-item-date'>2018.08.31</view>
+        </view>
+        <view class='record-list-info'>
+          <view style='position:relative'>
+            <image style='width:200rpx;height:94rpx;' src='../../images/btn_green04@2x.png'></image>
+            <view style='width:100%;position:absolute;font-size:15px;color:#fff;top:0;height:94rpx;line-height:94rpx;text-align:center'>立即查看</view>
+          </view>
+        </view>
       </view>
-      <view class='auth-sure-wrap' bindtap='authHandle'>
-        <image class='auth-sure' src='../../images/btn_yellow03@2x.png'></image>
-        <button plain='true' class='auth-btn' open-type="getUserInfo" bindgetuserinfo="getUserInfo">好，授权吧</button>
+
+    </view>
+    <view style='margin-top:20rpx;position:relative'>
+      <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
+      <view class='record-list-item'>
+        <view class='record-item-points'>
+          <view class='record-item-name' style='font-size:18px;color:#B96F1F;font-weight:bold'>Sam</view>
+          <view class='record-item-date'>2018.08.31</view>
+        </view>
+        <view class='record-list-info'>
+          <view style='position:relative'>
+            <image style='width:200rpx;height:94rpx;' src='../../images/btn_green04@2x.png'></image>
+            <view style='width:100%;position:absolute;font-size:15px;color:#fff;top:0;height:94rpx;line-height:94rpx;text-align:center'>立即查看</view>
+          </view>
+        </view>
+      </view>
+
+    </view>
+    <view style='margin-top:20rpx;position:relative'>
+      <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
+      <view class='record-list-item'>
+        <view class='record-item-points'>
+          <view class='record-item-name' style='font-size:18px;color:#B96F1F;font-weight:bold'>Sam</view>
+          <view class='record-item-date'>2018.08.31</view>
+        </view>
+        <view class='record-list-info'>
+          <view style='position:relative'>
+            <image style='width:200rpx;height:94rpx;' src='../../images/btn_green04@2x.png'></image>
+            <view style='width:100%;position:absolute;font-size:15px;color:#fff;top:0;height:94rpx;line-height:94rpx;text-align:center'>立即查看</view>
+          </view>
+        </view>
+      </view>
+
+    </view>
+    <view style='margin-top:20rpx;position:relative'>
+      <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
+      <view class='record-list-item'>
+        <view class='record-item-points'>
+          <view class='record-item-name' style='font-size:18px;color:#B96F1F;font-weight:bold'>Sam</view>
+          <view class='record-item-date'>2018.08.31</view>
+        </view>
+        <view class='record-list-info'>
+          <view style='position:relative'>
+            <image style='width:200rpx;height:94rpx;' src='../../images/btn_green04@2x.png'></image>
+            <view style='width:100%;position:absolute;font-size:15px;color:#fff;top:0;height:94rpx;line-height:94rpx;text-align:center'>立即查看</view>
+          </view>
+        </view>
+      </view>
+
+    </view>
+    <view style='margin-top:20rpx;position:relative'>
+      <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
+      <view class='record-list-item'>
+        <view class='record-item-points'>
+          <view class='record-item-name' style='font-size:18px;color:#B96F1F;font-weight:bold'>Sam</view>
+          <view class='record-item-date'>2018.08.31</view>
+        </view>
+        <view class='record-list-info'>
+          <view style='position:relative'>
+            <image style='width:200rpx;height:94rpx;' src='../../images/btn_green04@2x.png'></image>
+            <view style='width:100%;position:absolute;font-size:15px;color:#fff;top:0;height:94rpx;line-height:94rpx;text-align:center'>立即查看</view>
+          </view>
+        </view>
+      </view>
+
+    </view>
+  </view>
+  <view catchtouchmove='true' style='position:absolute;top:72%;display:flex;justify-content:center;width:100%;'>
+
+    <view style='height:328rpx;text-align:center'>
+      <image style='width:438rpx;height:14rpx;' src='../../images/line2@2x.png'></image>
+      <view style='margin-top:30rpx;position:relative'>
+        <image style='width:308rpx;height:94rpx;' src='../../images/btn_yellow01@2x.png'></image>
+        <view style='position:absolute;top:0;display:flex;align-items:center;justify-content:center;width:100%;height:84rpx;'>
+
+          <view style='color:#fff;font-size:15px'>刮奖</view>
+        </view>
+        <view style='color:#FAECD3;font-size:14px'>您还有2次刮奖的机会呦～</view>
       </view>
     </view>
   </view>
 
-  <!--对碰记录-->
-  <view   class='pop-win {{showRecord ? "show" : "hide"}}'>
-    <image class='pop-win-record-bg' src='../../images/record_bg@2x.png'></image>
+</view>
 
-    <view class='reacors-list-title' bindtap='closePopWin'>对碰记录</view>
-    <view class='record-list-wrap'>
-      <view style='margin-top:20rpx;position:relative'>
-        <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
-        <view class='record-list-item'>
-          <view class='record-list-info'>
-            <view class='record-item-avatar'>
-              <image src='../../images/img_car@2x.png'></image>
-            </view>
-            <view>
-              <view class='record-item-name'>Sam</view>
-              <view class='record-item-date'>2018.08.31</view>
-            </view>
+
+<!--排行榜-->
+<view class='pop-win {{showRanking ? "show" : "hide"}}'>
+  <image class='pop-win-record-bg' src='../../images/bg00@2x.png'></image>
+
+  <view class='reacors-list-title'>排行榜</view>
+  <image bindtap='closePopWin' style='width:80rpx;height:80rpx;position:absolute;top:-10rpx;left:-4rpx' src='../../images/icon_return@2x.png'></image>
+  <view class='record-list-wrap'>
+    <view style='margin-top:20rpx;position:relative'>
+      <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
+      <view class='record-list-item'>
+
+        <view class='record-list-info'>
+          <view style='margin-right:46rpx;color:#fff;text-shadow:0px 0px 2px #B96F1F;'>1</view>
+          <view class='record-item-avatar'>
+            <image src='../../images/img_car@2x.png'></image>
           </view>
-
-          <view class='record-item-points'>256</view>
+          <view>
+            <view class='record-item-name'>Sam</view>
+            <view class='record-item-date'>2018.08.31</view>
+          </view>
         </view>
-
+        <view class='record-item-points'>256</view>
       </view>
 
-      <view style='margin-top:20rpx;position:relative'>
-        <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
-
-        <view class='record-list-item'>
-          <view class='record-list-info'>
-            <view class='record-item-avatar'>
-              <image src='../../images/img_car@2x.png'></image>
-            </view>
-            <view>
-              <view class='record-item-name'>Sam</view>
-              <view class='record-item-date'>2018.08.31</view>
-            </view>
-          </view>
-
-          <view class='record-item-points'>256</view>
-        </view>
-
-      </view>
-
-      <view style='margin-top:20rpx;position:relative'>
-        <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
-
-        <view class='record-list-item'>
-          <view class='record-list-info'>
-            <view class='record-item-avatar'>
-              <image src='../../images/img_car@2x.png'></image>
-            </view>
-            <view>
-              <view class='record-item-name'>Sam</view>
-              <view class='record-item-date'>2018.08.31</view>
-            </view>
-          </view>
-
-          <view class='record-item-points'>256</view>
-        </view>
-
-      </view>
-      <view style='margin-top:20rpx;position:relative'>
-        <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
-
-        <view class='record-list-item'>
-          <view class='record-list-info'>
-            <view class='record-item-avatar'>
-              <image src='../../images/img_car@2x.png'></image>
-            </view>
-            <view>
-              <view class='record-item-name'>Sam</view>
-              <view class='record-item-date'>2018.08.31</view>
-            </view>
-          </view>
-
-          <view class='record-item-points'>256</view>
-        </view>
-
-      </view>
-      <view style='margin-top:20rpx;position:relative'>
-        <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
-
-        <view class='record-list-item'>
-          <view class='record-list-info'>
-            <view class='record-item-avatar'>
-              <image src='../../images/img_car@2x.png'></image>
-            </view>
-            <view>
-              <view class='record-item-name'>Sam</view>
-              <view class='record-item-date'>2018.08.31</view>
-            </view>
-          </view>
-
-          <view class='record-item-points'>256</view>
-        </view>
-
-      </view>
-      <view style='margin-top:20rpx;position:relative'>
-        <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
-
-        <view class='record-list-item'>
-          <view class='record-list-info'>
-            <view class='record-item-avatar'>
-              <image src='../../images/img_car@2x.png'></image>
-            </view>
-            <view>
-              <view class='record-item-name'>Sam</view>
-              <view class='record-item-date'>2018.08.31</view>
-            </view>
-          </view>
-
-          <view class='record-item-points'>256</view>
-        </view>
-
-      </view>
-      <view style='margin-top:20rpx;position:relative'>
-        <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
-
-        <view class='record-list-item'>
-          <view class='record-list-info'>
-            <view class='record-item-avatar'>
-              <image src='../../images/img_car@2x.png'></image>
-            </view>
-            <view>
-              <view class='record-item-name'>Sam</view>
-              <view class='record-item-date'>2018.08.31</view>
-            </view>
-          </view>
-
-          <view class='record-item-points'>256</view>
-        </view>
-
-      </view>
-    </view>
-    <view catchtouchmove='true' style='position:absolute;top:72%;display:flex;justify-content:center;width:100%;'>
-
-      <view style='height:328rpx;text-align:center'>
-        <image style='width:438rpx;height:14rpx;' src='../../images/img_line@2x.png'></image>
-        <view style='margin-top:30rpx;position:relative'>
-          <image style='width:610rpx;height:134rpx;' src='../../images/record_bg2@2x.png'></image>
-
-          <view class='record-list-item'>
-            <view class='record-list-info'>
-              <view class='record-item-avatar'>
-                <image src='../../images/img_car@2x.png'></image>
-              </view>
-              <view>
-                <view class='record-item-name'>小王子</view>
-              </view>
-            </view>
-
-            <view class='record-item-points'>256</view>
-          </view>
-
-        </view>
-      </view>
     </view>
 
+    <view style='margin-top:20rpx;position:relative'>
+      <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
+
+      <view class='record-list-item'>
+        <view class='record-list-info'>
+          <view class='record-item-avatar'>
+            <image src='../../images/img_car@2x.png'></image>
+          </view>
+          <view>
+            <view class='record-item-name'>Sam</view>
+            <view class='record-item-date'>2018.08.31</view>
+          </view>
+        </view>
+
+        <view class='record-item-points'>256</view>
+      </view>
+
+    </view>
+
+    <view style='margin-top:20rpx;position:relative'>
+      <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
+
+      <view class='record-list-item'>
+        <view class='record-list-info'>
+          <view class='record-item-avatar'>
+            <image src='../../images/img_car@2x.png'></image>
+          </view>
+          <view>
+            <view class='record-item-name'>Sam</view>
+            <view class='record-item-date'>2018.08.31</view>
+          </view>
+        </view>
+
+        <view class='record-item-points'>256</view>
+      </view>
+
+    </view>
+    <view style='margin-top:20rpx;position:relative'>
+      <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
+
+      <view class='record-list-item'>
+        <view class='record-list-info'>
+          <view class='record-item-avatar'>
+            <image src='../../images/img_car@2x.png'></image>
+          </view>
+          <view>
+            <view class='record-item-name'>Sam</view>
+            <view class='record-item-date'>2018.08.31</view>
+          </view>
+        </view>
+
+        <view class='record-item-points'>256</view>
+      </view>
+
+    </view>
+    <view style='margin-top:20rpx;position:relative'>
+      <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
+
+      <view class='record-list-item'>
+        <view class='record-list-info'>
+          <view class='record-item-avatar'>
+            <image src='../../images/img_car@2x.png'></image>
+          </view>
+          <view>
+            <view class='record-item-name'>Sam</view>
+            <view class='record-item-date'>2018.08.31</view>
+          </view>
+        </view>
+
+        <view class='record-item-points'>256</view>
+      </view>
+
+    </view>
+    <view style='margin-top:20rpx;position:relative'>
+      <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
+
+      <view class='record-list-item'>
+        <view class='record-list-info'>
+          <view class='record-item-avatar'>
+            <image src='../../images/img_car@2x.png'></image>
+          </view>
+          <view>
+            <view class='record-item-name'>Sam</view>
+            <view class='record-item-date'>2018.08.31</view>
+          </view>
+        </view>
+
+        <view class='record-item-points'>256</view>
+      </view>
+
+    </view>
+    <view style='margin-top:20rpx;position:relative'>
+      <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
+
+      <view class='record-list-item'>
+        <view class='record-list-info'>
+          <view class='record-item-avatar'>
+            <image src='../../images/img_car@2x.png'></image>
+          </view>
+          <view>
+            <view class='record-item-name'>Sam</view>
+            <view class='record-item-date'>2018.08.31</view>
+          </view>
+        </view>
+
+        <view class='record-item-points'>256</view>
+      </view>
+
+    </view>
   </view>
-  <!--对碰邀请-->
-  <view catchtouchmove='true' class='pop-win {{showPengTip ? "show" : "hide"}}'>
-    <view class='close-btn' bindtap='closePopWin'>
-      <image style='width:80rpx;height:80rpx;' src='../../images/icon_close@2x.png'></image>
-    </view>
-    <image class='pop-win-bg' src='../../images/record_bg6@2x.png'>
+  <view catchtouchmove='true' style='position:absolute;top:72%;display:flex;justify-content:center;width:100%;'>
 
-    </image>
-    <view class='tip-info-wrap'>
-      <image class='tree' src='../../images/share_img_trees@2x.png'></image>
-      <view class='tip-info'>
+    <view style='height:328rpx;text-align:center'>
+      <image style='width:438rpx;height:14rpx;' src='../../images/line2@2x.png'></image>
+      <view style='margin-top:30rpx;position:relative'>
+        <image style='width:308rpx;height:94rpx;' src='../../images/btn_yellow01@2x.png'></image>
+        <view style='position:absolute;top:0;display:flex;align-items:center;justify-content:center;width:100%;height:84rpx;'>
+          <image style='width:48rpx;height:56rpx' src='../../images/img_egg2@2x.png'></image>
+          <view style='color:#fff;font-size:15px'>砸金蛋</view>
+        </view>
+        <view style='color:#FAECD3;font-size:14px'>获得小组第一，才可以砸金蛋哟～</view>
+      </view>
+    </view>
+  </view>
+
+</view>
+
+
+<!--对碰邀请-->
+<view catchtouchmove='true' class='pop-win {{showPengTip ? "show" : "hide"}}'>
+  <view class='close-btn' bindtap='closePopWin'>
+    <image style='width:80rpx;height:80rpx;' src='../../images/icon_close@2x.png'></image>
+  </view>
+  <image class='pop-win-bg' src='../../images/record_bg6@2x.png'>
+
+  </image>
+  <view class='tip-info-wrap'>
+    <image class='tree' src='../../images/share_img_trees@2x.png'></image>
+    <view class='tip-info' style="width:60%">
+      <view>
+        <view class='tip-info-mine'>
+          256
+        </view>
+        <view class='tip-info-name'>Sam</view>
+      </view>
+      <view class='tip-info-VS'>VS</view>
+      <view>
+        <view class='tip-info-enemy'>1024</view>
+        <view class='tip-info-name'>小王子</view>
+      </view>
+    </view>
+    <view class='tip-info-dialog'> {{isCanPeng ? "您有好友发来邀请，是否对碰？": "您有好友数字不一致，无法对碰哦"}}</view>
+  </view>
+  <view>
+
+    <view wx:if="{{isCanPeng}}" class='tip-info-group'>
+      <view style='position:relative'>
+        <image style='width:308rpx;height:94rpx;' src='../../images/btn_yellow01@2x.png'></image>
+        <view style='position:absolute;top:50%;left:40%;transform: translate(-50%, -50%);font-size:16px;color:#fff'>碰</view>
+      </view>
+      <view style='position:relative'>
+        <image style='width:308rpx;height:94rpx;' src='../../images/btn_green01@2x.png'></image>
+        <view style='position:absolute;top:40%;left:50%;transform: translate(-50%, -50%);width:100%;font-size:16px;color:#fff'>哼，就是不碰</view>
+      </view>
+    </view>
+    <view wx:else class='tip-info-group-no-peng'>
+      <view style='position:relative'>
+        <image style='width:308rpx;height:94rpx;' src='../../images/btn_green01@2x.png'></image>
+        <view style='position:absolute;top:40%;left:50%;transform: translate(-50%, -50%);font-size:16px;color:#fff'>重新对碰</view>
+      </view>
+    </view>
+  </view>
+
+</view>
+
+
+<!--分享-->
+<view catchtouchmove='true' class='pop-win {{showShare ? "show" : "hide"}}'>
+  <view class='reacors-list-title' style='top:10rpx'>分享</view>
+  <image bindtap='closePopWin' style='width:80rpx;height:80rpx;position:absolute;top:-10rpx;left:-4rpx' src='../../images/icon_return@2x.png'></image>
+  <image class='pop-win-bg' src='../../images/share_bg0@2x.png'>
+
+  </image>
+  <view class='tip-info-wrap'>
+
+    <view class='tip-info' style='justify-content:center;color:#BE7066;font-size:100px;font-weight:bold;top:48%'>
+      <view>2</view>
+    </view>
+    <view class='tip-info-dialog' style='font-size:15px;top:65%;'>对碰数字，获得奖励升级</view>
+  </view>
+  <view>
+
+    <view class='tip-info-group' style='top:81%'>
+      <view style='position:relative'>
+        <image style='width:308rpx;height:94rpx;' src='../../images/btn_yellow01@2x.png'></image>
+        <view style='position:absolute;top:50%;left:50%;width:90%;transform: translate(-50%, -50%);font-size:16px;color:#fff;display:flex;justify-content:center;align-items:center}'>
+          <view>
+            <image style='width:40rpx;height:40rpx;' src='../../images/icon_moments@2x.png'></image>
+          </view>
+          <view>分享到朋友圈</view>
+        </view>
+
+      </view>
+      <view style='position:relative'>
+        <image style='width:308rpx;height:94rpx;' src='../../images/btn_green01@2x.png'></image>
+        <view style='position:absolute;top:50%;left:50%;width:90%;transform: translate(-50%, -50%);font-size:16px;color:#fff;display:flex;justify-content:center;align-items:center}'>
+          <view>
+            <image style='width:40rpx;height:40rpx;' src='../../images/icon_wechat@2x.png'></image>
+          </view>
+          <view>分享到微信</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+</view>
+
+<!--下载陆金所-->
+<view catchtouchmove='true' class='pop-win {{showDownload ? "show" : "hide"}}'>
+  <view class='reacors-list-title'>下载陆金所</view>
+  <image bindtap='closePopWin' style='width:80rpx;height:80rpx;position:absolute;top:-10rpx;left:-4rpx' src='../../images/icon_return@2x.png'></image>
+  <image class='pop-win-bg' src='../../images/bg@2x.png' style='width:700rpx;height:734rpx;'>
+
+  </image>
+  <view class='tip-info-wrap'>
+
+    <view style='color:#BE7066;font-size:17px;font-weight:bold;top:25%;position:absolute;width:80%;padding:0 10%'>
+      <view style='margin-top:26rpx;display:flex;justify-content:space-between;'>
         <view>
-          <view class='tip-info-mine'>
-            256
-          </view>
-          <view class='tip-info-name'>Sam</view>
+          <text>1.点击 </text>
+          <text style='color:#FB7A45'>“右上角三个点”</text>
         </view>
-        <view class='tip-info-VS'>VS</view>
         <view>
-          <view class='tip-info-enemy'>1024</view>
-          <view class='tip-info-name'>小王子</view>
+          <image style='width:116rpx;height:80rpx;' src='../../images/download_img01@2x.png'></image>
         </view>
       </view>
-      <view class='tip-info-dialog'> {{isCanPeng ? "您有好友发来邀请，是否对碰？": "您有好友数字不一致，无法对碰哦"}}</view>
-    </view>
-    <view>
-
-      <view wx:if="{{isCanPeng}}" class='tip-info-group'>
-        <view style='position:relative'>
-          <image style='width:308rpx;height:94rpx;' src='../../images/btn_yellow01@2x.png'></image>
-          <view style='position:absolute;top:50%;left:50%;transform: translate(-50%, -50%);font-size:16px;color:#fff'>碰</view>
+      <view style='margin-top:-20rpx;display:flex;align-items:center'>
+        <view>
+          <text>2.点击 </text>
+          <text style='color:#FB7A45'>“相关公众号”</text>
         </view>
-        <view style='position:relative'>
-          <image style='width:308rpx;height:94rpx;' src='../../images/btn_green01@2x.png'></image>
-          <view style='position:absolute;top:50%;left:50%;transform: translate(-50%, -50%);width:100%;font-size:16px;color:#fff'>哼，就是不碰</view>
+        <view>
+          <image style='width:66rpx;height:66rpx' src='../../images/download_img02@2x.png'></image>
         </view>
       </view>
-      <view wx:else class='tip-info-group-no-peng'>
-        <view style='position:relative'>
-          <image style='width:308rpx;height:94rpx;' src='../../images/btn_green01@2x.png'></image>
-          <view style='position:absolute;top:50%;left:50%;transform: translate(-50%, -50%);font-size:16px;color:#fff'>重新对碰</view>
-        </view>
+      <view style='margin-top:26rpx;'>
+        <text>3.选择下方 </text>
+        <text style='color:#FB7A45'>“陆金所理财精选”</text>
       </view>
-    </view>
-
-  </view>
-
-
-  <!--分享-->
-  <view catchtouchmove='true' class='pop-win {{showShare ? "show" : "hide"}}'>
-    <view class='reacors-list-title' style='top:10rpx'>分享</view>
-    <image bindtap='closePopWin' style='width:80rpx;height:80rpx;position:absolute;top:-10rpx;left:-4rpx' src='../../images/icon_return@2x.png'></image>
-    <image class='pop-win-bg' src='../../images/share_bg0@2x.png'>
-
-    </image>
-    <view class='tip-info-wrap'>
-
-      <view class='tip-info' style='justify-content:center;color:#BE7066;font-size:100px;font-weight:bold;top:48%'>
-        <view>2</view>
+      <view style='display:flex;justify-content:center;margin-top:28rpx;'>
+        <view style='width:500rpx;height:66rpx;line-height:66rpx;text-align:center;background:#fff;border:1px solid #B5B5B5;border-radius:17px;color:#333'>陆金所理财精选</view>
       </view>
-      <view class='tip-info-dialog' style='font-size:15px;top:65%;'>对碰数字，获得奖励升级</view>
-    </view>
-    <view>
-
-      <view class='tip-info-group' style='top:81%'>
-        <view style='position:relative'>
-          <image style='width:308rpx;height:94rpx;' src='../../images/btn_yellow01@2x.png'></image>
-          <view style='position:absolute;top:50%;left:50%;width:90%;transform: translate(-50%, -50%);font-size:16px;color:#fff;display:flex;justify-content:center;align-items:center}'>
-            <view>
-              <image style='width:40rpx;height:40rpx;' src='../../images/icon_moments@2x.png'></image>
-            </view>
-            <view>分享到朋友圈</view>
-          </view>
-
-        </view>
-        <view style='position:relative'>
-          <image style='width:308rpx;height:94rpx;' src='../../images/btn_green01@2x.png'></image>
-          <view style='position:absolute;top:50%;left:50%;width:90%;transform: translate(-50%, -50%);font-size:16px;color:#fff;display:flex;justify-content:center;align-items:center}'>
-            <view>
-              <image style='width:40rpx;height:40rpx;' src='../../images/icon_wechat@2x.png'></image>
-            </view>
-            <view>分享到微信</view>
-          </view>
-        </view>
-      </view>
-    </view>
-
-  </view>
-
-  <!--下载陆金所-->
-  <view catchtouchmove='true' class='pop-win {{showDownload ? "show" : "hide"}}'>
-    <view class='reacors-list-title'>下载陆金所</view>
-    <image bindtap='closePopWin' style='width:80rpx;height:80rpx;position:absolute;top:-10rpx;left:-4rpx' src='../../images/icon_return@2x.png'></image>
-    <image class='pop-win-bg' src='../../images/bg@2x.png' style='width:700rpx;height:734rpx;'>
-
-    </image>
-    <view class='tip-info-wrap'>
-
-      <view style='color:#BE7066;font-size:17px;font-weight:bold;top:25%;position:absolute;width:80%;padding:0 10%'>
-        <view style='margin-top:26rpx;display:flex;justify-content:space-between;'>
-          <view>
-            <text>1.点击 </text>
-            <text style='color:#FB7A45'>“右上角三个点”</text>
-          </view>
-          <view>
-            <image style='width:116rpx;height:80rpx;' src='../../images/download_img01@2x.png'></image>
-          </view>
-        </view>
-        <view style='margin-top:-20rpx;display:flex;align-items:center'>
-          <view>
-            <text>2.点击 </text>
-            <text style='color:#FB7A45'>“相关公众号”</text>
-          </view>
-          <view>
-            <image style='width:66rpx;height:66rpx' src='../../images/download_img02@2x.png'></image>
-          </view>
-        </view>
-        <view style='margin-top:26rpx;'>
-          <text>3.选择下方 </text>
-          <text style='color:#FB7A45'>“陆金所理财精选”</text>
-        </view>
-        <view style='display:flex;justify-content:center;margin-top:28rpx;'>
-          <view style='width:500rpx;height:66rpx;line-height:66rpx;text-align:center;background:#fff;border:1px solid #B5B5B5;border-radius:17px;color:#333'>陆金所理财精选</view>
-        </view>
-        <view style='margin-top:26rpx;'>
-          <text>4.点击 </text>
-          <text style='color:#FB7A45'>“个人理财”，“下载陆金所APP”。</text>
-        </view>
+      <view style='margin-top:26rpx;'>
+        <text>4.点击 </text>
+        <text style='color:#FB7A45'>“个人理财”，“下载陆金所APP”。</text>
       </view>
     </view>
   </view>
+</view>
 
-  <!--刮奖提示-->
-  <view catchtouchmove='true' class='pop-win {{showScratchTip ? "show" : "hide"}}'>
-    <view class='close-btn' bindtap='closePopWin'>
-      <image style='width:80rpx;height:80rpx;' src='../../images/icon_close@2x.png'></image>
-    </view>
-    <image class='pop-win-bg' src='../../images/tip_bg5@2x.png'>
+<!--刮奖提示-->
+<view catchtouchmove='true' class='pop-win {{showScratchTip ? "show" : "hide"}}'>
+  <view class='close-btn' bindtap='closePopWin'>
+    <image style='width:80rpx;height:80rpx;' src='../../images/icon_close@2x.png'></image>
+  </view>
+  <image class='pop-win-bg' src='../../images/tip_bg5@2x.png'>
 
-    </image>
-    <view style='position:absolute;top:50%;left:50%;transform: translate(-50%, -50%);font-size:16px;color:#7F3A3B;width:90%;text-align:center'>您有待刮的奖励，是否前往刮奖？</view>
-    <view>
-      <view class='tip-info-group'>
-        <view style='position:relative' bindtap='closePopWin'>
-          <image style='width:308rpx;height:94rpx;' src='../../images/btn_yellow01@2x.png'></image>
-          <view style='position:absolute;top:50%;left:50%;transform: translate(-50%, -50%);font-size:16px;color:#fff'>取消</view>
-        </view>
-        <view style='position:relative' bindtap='startScratchHandle'>
-          <image style='width:308rpx;height:94rpx;' src='../../images/btn_green01@2x.png'></image>
-          <view style='position:absolute;top:50%;left:50%;transform: translate(-50%, -50%);width:100%;font-size:16px;color:#fff'>刮奖</view>
-        </view>
-
+  </image>
+  <view style='position:absolute;top:50%;left:50%;transform: translate(-50%, -50%);font-size:16px;color:#7F3A3B;width:90%;text-align:center'>您有待刮的奖励，是否前往刮奖？</view>
+  <view>
+    <view class='tip-info-group'>
+      <view style='position:relative' bindtap='closePopWin'>
+        <image style='width:308rpx;height:94rpx;' src='../../images/btn_yellow01@2x.png'></image>
+        <view style='position:absolute;top:50%;left:50%;transform: translate(-50%, -50%);font-size:16px;color:#fff'>取消</view>
       </view>
+      <view style='position:relative' bindtap='startScratchHandle'>
+        <image style='width:308rpx;height:94rpx;' src='../../images/btn_green01@2x.png'></image>
+        <view style='position:absolute;top:50%;left:50%;transform: translate(-50%, -50%);width:100%;font-size:16px;color:#fff'>刮奖</view>
+      </view>
+
+    </view>
+  </view>
+</view>
+
+<!--碰过了页面-->
+<view catchtouchmove='true' class='pop-win {{showPengFail ? "show" : "hide"}}'>
+  <view class='close-btn' bindtap='closePopWin'>
+    <image style='width:80rpx;height:80rpx;' src='../../images/icon_close@2x.png'></image>
+  </view>
+  <view class='pop-win-bg' style='flex-direction:column;align-item:center;display:flex;justify-content:flex-start'>
+    <view style='text-align:center'>
+      <image style='width:584rpx;height:100rpx;' src='../../images/tip_failure@2x.png'>
+      </image>
+    </view>
+    <view style='text-align:center;font-size:15px;color:#fff;text-shadow:1px 1px 1px #050E87; '>您与好友已经碰过，寻找其他好友吧</view>
+    <view style='text-align:center'>
+      <image style='width:300rpx;height:280rpx;background:red' src='../../images/tip_failure@2x.png'>
+      </image>
+    </view>
+    <view style='text-align:center;position:relative'>
+      <image style='width:302rpx;height:94rpx' src='../../images/btn_blue02@2x.png'>
+      </image>
+      <view style='position:absolute;color:#fff;top:0;top:50%;left:50%;transform: translate(-50%, -50%);font-size:15px'>重新对碰</view>
     </view>
   </view>
 
-  <!--碰过了页面-->
-  <view catchtouchmove='true' class='pop-win {{showPengFail ? "show" : "hide"}}'>
-    <view class='close-btn' bindtap='closePopWin'>
-      <image style='width:80rpx;height:80rpx;' src='../../images/icon_close@2x.png'></image>
+
+
+</view>
+
+
+<!--对碰成功-->
+<view catchtouchmove='true' class='pop-win {{showPengSuccess ? "show" : "hide"}}'>
+  <view class='close-btn' bindtap='closePopWin'>
+    <image style='width:80rpx;height:80rpx;' src='../../images/icon_close@2x.png'></image>
+  </view>
+  <view class='pop-win-bg' style='flex-direction:column;align-item:center;display:flex;justify-content:flex-start'>
+    <view style='text-align:center'>
+      <image style='width:348rpx;height:114rpx;' src='../../images/tip_succes@2x.png'>
+      </image>
     </view>
-    <view class='pop-win-bg' style='flex-direction:column;align-item:center;display:flex;justify-content:flex-start'>
-      <view style='text-align:center'>
-        <image style='width:584rpx;height:100rpx;' src='../../images/tip_failure@2x.png'>
-        </image>
-      </view>
-      <view style='text-align:center;font-size:15px;color:#fff;text-shadow:1px 1px 1px #050E87; '>您与好友已经碰过，寻找其他好友吧</view>
-      <view style='text-align:center'>
-        <image style='width:300rpx;height:280rpx;background:red' src='../../images/tip_failure@2x.png'>
-        </image>
-      </view>
-      <view style='text-align:center;position:relative'>
-        <image style='width:302rpx;height:94rpx' src='../../images/btn_blue02@2x.png'>
-        </image>
-        <view style='position:absolute;color:#fff;top:0;top:50%;left:50%;transform: translate(-50%, -50%);font-size:15px'>重新对碰</view>
-      </view>
+    <view style='text-align:center;font-size:15px;color:#fff;text-shadow:1px 1px 1px #921D17;'>对碰数字 获得升级奖励</view>
+    <view style='text-align:center;position:relative'>
+      <image style='width:326rpx;height:326rpx;' src='../../images/img_ray@2x.png'>
+      </image>
+      <image style='width:102rpx;height:158rpx;position:absolute;top:50%;left:50%;transform: translate(-50%, -50%);' src='../../images/4@2x.png'></image>
     </view>
-
-
-
+    <view style='text-align:center;position:relative'>
+      <image style='width:302rpx;height:94rpx' src='../../images/btn_yellow02@2x.png'>
+      </image>
+      <view style='position:absolute;color:#fff;top:50%;left:50%;transform: translate(-50%, -50%);font-size:15px'>立即刮奖</view>
+    </view>
   </view>
 
 
-  <!--对碰成功-->
-  <view catchtouchmove='true' class='pop-win {{showPengSuccess ? "show" : "hide"}}'>
-    <view class='close-btn' bindtap='closePopWin'>
-      <image style='width:80rpx;height:80rpx;' src='../../images/icon_close@2x.png'></image>
-    </view>
-    <view class='pop-win-bg' style='flex-direction:column;align-item:center;display:flex;justify-content:flex-start'>
-      <view style='text-align:center'>
-        <image style='width:348rpx;height:114rpx;' src='../../images/tip_succes@2x.png'>
-        </image>
-      </view>
-      <view style='text-align:center;font-size:15px;color:#fff;text-shadow:1px 1px 1px #921D17;'>对碰数字 获得升级奖励</view>
-      <view style='text-align:center;position:relative'>
-        <image style='width:326rpx;height:326rpx;' src='../../images/img_ray@2x.png'>
-        </image>
-        <image style='width:102rpx;height:158rpx;position:absolute;top:50%;left:50%;transform: translate(-50%, -50%);' src='../../images/4@2x.png'></image>
-      </view>
-      <view style='text-align:center;position:relative'>
-        <image style='width:302rpx;height:94rpx' src='../../images/btn_yellow02@2x.png'>
-        </image>
-        <view style='position:absolute;color:#fff;top:50%;left:50%;transform: translate(-50%, -50%);font-size:15px'>立即刮奖</view>
-      </view>
-    </view>
 
+</view>
 
+<!--砸金蛋-->
+<view catchtouchmove='true' class='pop-win {{showEgg? "show" : "hide"}}'>
+  <view class='close-btn' bindtap='closePopWin'>
+    <image style='width:80rpx;height:80rpx;' src='../../images/icon_close@2x.png'></image>
+  </view>
+  <image class='pop-win-bg' src='../../images/egg_bg_04@2x.png'>
+
+  </image>
+  <view style='position:absolute;top:79%;left:50%;width:90%;color:#921D17;font-size:17px;text-align:center;transform:translate(-50%, -50%);'>
+    <view style='width:100%;text-align:right;font-size:15px;color:#fff'>点在金蛋上，就可以砸金蛋了～</view>
+  </view>
+</view>
+
+<!--砸金蛋碎了-->
+<view catchtouchmove='true' class='pop-win {{showEggAward? "show" : "hide"}}'>
+  <view class='close-btn' bindtap='closePopWin'>
+    <image style='width:80rpx;height:80rpx;' src='../../images/icon_close@2x.png'></image>
+  </view>
+  <image class='pop-win-bg' src='../../images/egg_bg01@2x.png'>
+
+  </image>
+  <view style='position:absolute;top:42%;left:50%;transform: translate(-50%, -50%);font-size:18px;color:#FC4F33;width:90%;text-align:center'>恭喜您，中奖了</view>
+  <view style='position:absolute;top:50%;left:50%;transform: translate(-50%, -50%);font-size:20px;color:#A85147;width:90%;text-align:center'>iPhoneX （64G）</view>
+  <view style='position:absolute;top:61%;left:50%;transform: translate(-50%, -50%);font-size:20px;color:#A85147;width:90%;text-align:center'>
+    <image style='width:302rpx;height:94rpx' src='../../images/btn_red2@2x.png'></image>
 
   </view>
 
-  <!--砸金蛋-->
-  <view catchtouchmove='true' class='pop-win {{showEgg? "show" : "hide"}}'>
-    <view class='close-btn' bindtap='closePopWin'>
-      <image style='width:80rpx;height:80rpx;' src='../../images/icon_close@2x.png'></image>
-    </view>
-    <image class='pop-win-bg' src='../../images/egg_bg_04@2x.png'>
-
-    </image>
-    <view style='position:absolute;top:79%;left:50%;width:90%;color:#921D17;font-size:17px;text-align:center;transform:translate(-50%, -50%);'>
-      <view style='width:100%;text-align:right;font-size:15px;color:#fff'>点在金蛋上，就可以砸金蛋了～</view>
-    </view>
+  <view style='position:absolute;top:61%;left:50%;transform: translate(-50%, -50%);font-size:20px;color:#A85147;width:90%;text-align:center'>
+    <view style='font-size:15px;color:#fff'>立即领取</view>
   </view>
-
-  <!--砸金蛋碎了-->
-  <view catchtouchmove='true' class='pop-win {{showEggAward? "show" : "hide"}}'>
-    <view class='close-btn' bindtap='closePopWin'>
-      <image style='width:80rpx;height:80rpx;' src='../../images/icon_close@2x.png'></image>
-    </view>
-    <image class='pop-win-bg' src='../../images/egg_bg01@2x.png'>
-
-    </image>
-    <view style='position:absolute;top:42%;left:50%;transform: translate(-50%, -50%);font-size:18px;color:#FC4F33;width:90%;text-align:center'>恭喜您，中奖了</view>
-    <view style='position:absolute;top:50%;left:50%;transform: translate(-50%, -50%);font-size:20px;color:#A85147;width:90%;text-align:center'>iPhoneX （64G）</view>
-    <view style='position:absolute;top:61%;left:50%;transform: translate(-50%, -50%);font-size:20px;color:#A85147;width:90%;text-align:center'>
-      <image style='width:302rpx;height:94rpx' src='../../images/btn_red2@2x.png'></image>
-
-    </view>
-
-    <view style='position:absolute;top:61%;left:50%;transform: translate(-50%, -50%);font-size:20px;color:#A85147;width:90%;text-align:center'>
-      <view style='font-size:15px;color:#fff'>立即领取</view>
-    </view>
-    <view style='position:absolute;top:79%;left:50%;width:90%;color:#921D17;font-size:17px;text-align:center;transform:translate(-50%, -50%);'>
-      <view style='width:100%;text-align:right;font-size:15px;color:#fff'>您还有一份刮刮卡待领取,
-        <text style='color:#FFE245'>去挂卡～</text>
-      </view>
+  <view style='position:absolute;top:79%;left:50%;width:90%;color:#921D17;font-size:17px;text-align:center;transform:translate(-50%, -50%);'>
+    <view style='width:100%;text-align:right;font-size:15px;color:#fff'>您还有一份刮刮卡待领取,
+      <text style='color:#FFE245'>去挂卡～</text>
     </view>
   </view>
 </view>

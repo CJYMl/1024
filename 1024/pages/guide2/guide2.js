@@ -7,7 +7,7 @@ Page({
   data: {
 
   },
-
+ 
   /**
    * 生命周期函数--监听页面加载
    */
@@ -19,9 +19,25 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+     this.setSystemSize()
   },
-
+  setSystemSize: function () {
+    let {
+      windowHeight,
+      windowWidth
+    } = wx.getSystemInfoSync()
+    this.setData({
+      windowHeight: windowHeight,
+      windowWidth: windowWidth
+    })
+  }, 
+  toHome:function(){
+    wx.setStorageSync("hasVisit", true)
+    wx.navigateTo({
+      url: '../../packageA/index/index?hasVisit=true',
+    })
+ 
+  },
   /**
    * 生命周期函数--监听页面显示
    */

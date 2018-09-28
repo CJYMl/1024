@@ -1,4 +1,6 @@
 <!--pages/guide/guide.wxml-->
-<text>pages/guide/guide.wxml</text>
-<view>guide1</view>
-<button bindtap='toGuide2'>to guide2</button>
+<view class="container" style='overflow:auto;-webkit-overflow-scrolling: touch;width:{{windowWidth}}px;height:{{windowHeight}}px'>
+  <view class='home-bg' style='width:{{windowWidth}}px;height:{{windowHeight}}px'>
+    <image bindtap="toGuide2" style='width:{{windowWidth}}px;height:{{windowHeight}}px' src="../../images/guide1.jpg"></image>   
+  </view>
+</view>
