@@ -10,6 +10,20 @@ App({
     // 登录
     wx.login({
       success: res => {
+        console.log(res.code)
+        wx.request({
+          url: 'https://1024-test.inansy.com',
+          method:'post',
+          data:{
+            jsCode: res.code
+          },
+          success:function(data){
+            console.log(data)   
+          },
+          fail:function(err){
+            console.log(err)
+          }
+        })
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
       }
     })

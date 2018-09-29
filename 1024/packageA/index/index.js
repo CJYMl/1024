@@ -1,6 +1,7 @@
 //index.js
 //获取应用实例
 import Scratch from "../../components/scratch/scratch.js"
+import API from "../../api.js"
 const app = getApp()
 
 Page({
@@ -40,7 +41,7 @@ Page({
         showAuth:false
       })
     }
-    console.log(options)
+    console.log(API)
     this.setSystemSize()
     this.initScratch()
     if (app.globalData.userInfo) {
