@@ -1,10 +1,13 @@
 
-const requestApi = (url,params,method) => {
+const requestApi = (url, params, method, token) => {
      return new Promise((resolve,reject) => {
            wx.request({
              url,
              data:params,
              method:method || "GET",
+             header: {
+               authorization:token
+             },
              success: (res) => {
                resolve(res)   
              },
@@ -14,5 +17,7 @@ const requestApi = (url,params,method) => {
            })
      })
 }
-
+module.exports = {
+  requestApi
+}
 

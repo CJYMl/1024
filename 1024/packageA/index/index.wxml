@@ -13,14 +13,12 @@
     </view>
     <view class='peng-title'>
       <view class='peng-title-label' bindtap='showRecordHandle'>对碰记录</view>
-      <view class='peng-percent'>1/9</view>
+      <view class='peng-percent'>{{userGameInfo.touchTimes}}/9</view>
     </view>
     <view class='friends-dynamic'>
       <view class='friends-dynamic-title'>好友动态</view>
       <view class='friends-dynamic-info'>
-        <view>SAM对碰成4</view>
-        <view>小王子对碰成8</view>
-        <view>燕子南飞对碰成16</view>
+        <view wx:for='{{friendsDynamic}}' wx:key="unique">{{item.nickname}}对碰成{{item.step}}</view>
       </view>
     </view>
     <view class='navibar'>
@@ -35,29 +33,11 @@
     <view class='activity-info prize-info'>
       <image class='left-arrow' src='../../images/icon_left@2x.png'></image>
       <view class='prize-info-item'>
-        <view>
+        <view wx:for="{{prizeList}}" wx:key="index">
           <view class='prize-image-wrap'>
-            <image src='../../images/prize_10m@2x.png'></image>
+            <image src='{{item.img}}'></image>
           </view>
-          <view>30元投资券</view>
-        </view>
-        <view>
-          <view class='prize-image-wrap'>
-            <image src='../../images/prize_10m@2x.png'></image>
-          </view>
-          <view>30元投资券</view>
-        </view>
-        <view>
-          <view class='prize-image-wrap'>
-            <image src='../../images/prize_10m@2x.png'></image>
-          </view>
-          <view>30元投资券</view>
-        </view>
-        <view>
-          <view class='prize-image-wrap'>
-            <image src='../../images/prize_10m@2x.png'></image>
-          </view>
-          <view>30元投资券</view>
+          <view>{{item.title}}</view>
         </view>
       </view>
       <image class='right-arrow' src='../../images/icon_right@2x.png'></image>
@@ -135,130 +115,20 @@
   <view class='reacors-list-title'>对碰记录</view>
   <image bindtap='closePopWin' style='width:80rpx;height:80rpx;position:absolute;top:-10rpx;left:-4rpx' src='../../images/icon_return@2x.png'></image>
   <view class='record-list-wrap'>
-    <view style='margin-top:20rpx;position:relative'>
+    <view wx:for="{{touchRecords.list}}" wx:key="index" style='margin-top:20rpx;position:relative'>
       <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
       <view class='record-list-item'>
         <view class='record-list-info'>
           <view class='record-item-avatar'>
-            <image src='../../images/img_car@2x.png'></image>
+            <image src='{{item.avatar}}'></image>
           </view>
           <view>
-            <view class='record-item-name'>Sam</view>
-            <view class='record-item-date'>2018.08.31</view>
+            <view class='record-item-name'>{{item.nickname}}</view>
+            <view class='record-item-date'>{{item.touchTime}}</view>
           </view>
         </view>
 
-        <view class='record-item-points'>256</view>
-      </view>
-
-    </view>
-
-    <view style='margin-top:20rpx;position:relative'>
-      <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
-
-      <view class='record-list-item'>
-        <view class='record-list-info'>
-          <view class='record-item-avatar'>
-            <image src='../../images/img_car@2x.png'></image>
-          </view>
-          <view>
-            <view class='record-item-name'>Sam</view>
-            <view class='record-item-date'>2018.08.31</view>
-          </view>
-        </view>
-
-        <view class='record-item-points'>256</view>
-      </view>
-
-    </view>
-
-    <view style='margin-top:20rpx;position:relative'>
-      <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
-
-      <view class='record-list-item'>
-        <view class='record-list-info'>
-          <view class='record-item-avatar'>
-            <image src='../../images/img_car@2x.png'></image>
-          </view>
-          <view>
-            <view class='record-item-name'>Sam</view>
-            <view class='record-item-date'>2018.08.31</view>
-          </view>
-        </view>
-
-        <view class='record-item-points'>256</view>
-      </view>
-
-    </view>
-    <view style='margin-top:20rpx;position:relative'>
-      <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
-
-      <view class='record-list-item'>
-        <view class='record-list-info'>
-          <view class='record-item-avatar'>
-            <image src='../../images/img_car@2x.png'></image>
-          </view>
-          <view>
-            <view class='record-item-name'>Sam</view>
-            <view class='record-item-date'>2018.08.31</view>
-          </view>
-        </view>
-
-        <view class='record-item-points'>256</view>
-      </view>
-
-    </view>
-    <view style='margin-top:20rpx;position:relative'>
-      <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
-
-      <view class='record-list-item'>
-        <view class='record-list-info'>
-          <view class='record-item-avatar'>
-            <image src='../../images/img_car@2x.png'></image>
-          </view>
-          <view>
-            <view class='record-item-name'>Sam</view>
-            <view class='record-item-date'>2018.08.31</view>
-          </view>
-        </view>
-
-        <view class='record-item-points'>256</view>
-      </view>
-
-    </view>
-    <view style='margin-top:20rpx;position:relative'>
-      <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
-
-      <view class='record-list-item'>
-        <view class='record-list-info'>
-          <view class='record-item-avatar'>
-            <image src='../../images/img_car@2x.png'></image>
-          </view>
-          <view>
-            <view class='record-item-name'>Sam</view>
-            <view class='record-item-date'>2018.08.31</view>
-          </view>
-        </view>
-
-        <view class='record-item-points'>256</view>
-      </view>
-
-    </view>
-    <view style='margin-top:20rpx;position:relative'>
-      <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
-
-      <view class='record-list-item'>
-        <view class='record-list-info'>
-          <view class='record-item-avatar'>
-            <image src='../../images/img_car@2x.png'></image>
-          </view>
-          <view>
-            <view class='record-item-name'>Sam</view>
-            <view class='record-item-date'>2018.08.31</view>
-          </view>
-        </view>
-
-        <view class='record-item-points'>256</view>
+        <view class='record-item-points'>{{item.step}}</view>
       </view>
 
     </view>
@@ -273,14 +143,14 @@
         <view class='record-list-item'>
           <view class='record-list-info'>
             <view class='record-item-avatar'>
-              <image src='../../images/img_car@2x.png'></image>
+              <image src='{{touchRecords.self.avatar}}'></image>
             </view>
             <view>
-              <view class='record-item-name'>小王子</view>
+              <view class='record-item-name'>{{touchRecords.self.nickname}}</view>
             </view>
           </view>
 
-          <view class='record-item-points'>256</view>
+          <view class='record-item-points'>{{touchRecords.self.step}}</view>
         </view>
 
       </view>
@@ -297,12 +167,12 @@
   <view class='reacors-list-title'>中奖记录</view>
   <image bindtap='closePopWin' style='width:80rpx;height:80rpx;position:absolute;top:-10rpx;left:-4rpx' src='../../images/icon_return@2x.png'></image>
   <view class='record-list-wrap'>
-    <view style='margin-top:20rpx;position:relative'>
+    <view wx:for="{{prizeRecords}}" wx:key="index" style='margin-top:20rpx;position:relative'>
       <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
       <view class='record-list-item'>
         <view class='record-item-points'>
-          <view class='record-item-name' style='font-size:18px;color:#B96F1F;font-weight:bold'>Sam</view>
-          <view class='record-item-date'>2018.08.31</view>
+          <view class='record-item-name' style='font-size:18px;color:#B96F1F;font-weight:bold'>{{item.title}}</view>
+          <view class='record-item-date'>{{item.drawTime}}</view>
         </view>
         <view class='record-list-info'>
           <view style='position:relative'>
@@ -311,87 +181,6 @@
           </view>
         </view>
       </view>
-
-    </view>
-    <view style='margin-top:20rpx;position:relative'>
-      <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
-      <view class='record-list-item'>
-        <view class='record-item-points'>
-          <view class='record-item-name' style='font-size:18px;color:#B96F1F;font-weight:bold'>Sam</view>
-          <view class='record-item-date'>2018.08.31</view>
-        </view>
-        <view class='record-list-info'>
-          <view style='position:relative'>
-            <image style='width:200rpx;height:94rpx;' src='../../images/btn_green04@2x.png'></image>
-            <view style='width:100%;position:absolute;font-size:15px;color:#fff;top:0;height:94rpx;line-height:94rpx;text-align:center'>立即查看</view>
-          </view>
-        </view>
-      </view>
-
-    </view>
-    <view style='margin-top:20rpx;position:relative'>
-      <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
-      <view class='record-list-item'>
-        <view class='record-item-points'>
-          <view class='record-item-name' style='font-size:18px;color:#B96F1F;font-weight:bold'>Sam</view>
-          <view class='record-item-date'>2018.08.31</view>
-        </view>
-        <view class='record-list-info'>
-          <view style='position:relative'>
-            <image style='width:200rpx;height:94rpx;' src='../../images/btn_green04@2x.png'></image>
-            <view style='width:100%;position:absolute;font-size:15px;color:#fff;top:0;height:94rpx;line-height:94rpx;text-align:center'>立即查看</view>
-          </view>
-        </view>
-      </view>
-
-    </view>
-    <view style='margin-top:20rpx;position:relative'>
-      <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
-      <view class='record-list-item'>
-        <view class='record-item-points'>
-          <view class='record-item-name' style='font-size:18px;color:#B96F1F;font-weight:bold'>Sam</view>
-          <view class='record-item-date'>2018.08.31</view>
-        </view>
-        <view class='record-list-info'>
-          <view style='position:relative'>
-            <image style='width:200rpx;height:94rpx;' src='../../images/btn_green04@2x.png'></image>
-            <view style='width:100%;position:absolute;font-size:15px;color:#fff;top:0;height:94rpx;line-height:94rpx;text-align:center'>立即查看</view>
-          </view>
-        </view>
-      </view>
-
-    </view>
-    <view style='margin-top:20rpx;position:relative'>
-      <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
-      <view class='record-list-item'>
-        <view class='record-item-points'>
-          <view class='record-item-name' style='font-size:18px;color:#B96F1F;font-weight:bold'>Sam</view>
-          <view class='record-item-date'>2018.08.31</view>
-        </view>
-        <view class='record-list-info'>
-          <view style='position:relative'>
-            <image style='width:200rpx;height:94rpx;' src='../../images/btn_green04@2x.png'></image>
-            <view style='width:100%;position:absolute;font-size:15px;color:#fff;top:0;height:94rpx;line-height:94rpx;text-align:center'>立即查看</view>
-          </view>
-        </view>
-      </view>
-
-    </view>
-    <view style='margin-top:20rpx;position:relative'>
-      <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
-      <view class='record-list-item'>
-        <view class='record-item-points'>
-          <view class='record-item-name' style='font-size:18px;color:#B96F1F;font-weight:bold'>Sam</view>
-          <view class='record-item-date'>2018.08.31</view>
-        </view>
-        <view class='record-list-info'>
-          <view style='position:relative'>
-            <image style='width:200rpx;height:94rpx;' src='../../images/btn_green04@2x.png'></image>
-            <view style='width:100%;position:absolute;font-size:15px;color:#fff;top:0;height:94rpx;line-height:94rpx;text-align:center'>立即查看</view>
-          </view>
-        </view>
-      </view>
-
     </view>
   </view>
   <view catchtouchmove='true' style='position:absolute;top:72%;display:flex;justify-content:center;width:100%;'>
@@ -402,7 +191,7 @@
         <image style='width:308rpx;height:94rpx;' src='../../images/btn_yellow01@2x.png'></image>
         <view style='position:absolute;top:0;display:flex;align-items:center;justify-content:center;width:100%;height:84rpx;'>
 
-          <view style='color:#fff;font-size:15px'>刮奖</view>
+          <view bindtap='startScratch' style='color:#fff;font-size:15px'>刮奖</view>
         </view>
         <view style='color:#FAECD3;font-size:14px'>您还有2次刮奖的机会呦～</view>
       </view>
@@ -419,133 +208,21 @@
   <view class='reacors-list-title'>排行榜</view>
   <image bindtap='closePopWin' style='width:80rpx;height:80rpx;position:absolute;top:-10rpx;left:-4rpx' src='../../images/icon_return@2x.png'></image>
   <view class='record-list-wrap'>
-    <view style='margin-top:20rpx;position:relative'>
+    <view wx:for="{{rankings}}" wx:key="index" style='margin-top:20rpx;position:relative'>
       <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
       <view class='record-list-item'>
 
         <view class='record-list-info'>
-          <view style='margin-right:46rpx;color:#fff;text-shadow:0px 0px 2px #B96F1F;'>1</view>
+          <view style='margin-right:46rpx;color:#fff;text-shadow:0px 0px 2px #B96F1F;'>{{index+1}}</view>
           <view class='record-item-avatar'>
-            <image src='../../images/img_car@2x.png'></image>
+            <image src='{{item.avatar}}'></image>
           </view>
           <view>
-            <view class='record-item-name'>Sam</view>
-            <view class='record-item-date'>2018.08.31</view>
+            <view class='record-item-name'>{{item.nickname}}</view>
           </view>
         </view>
-        <view class='record-item-points'>256</view>
+        <view class='record-item-points'>{{item.step}}</view>
       </view>
-
-    </view>
-
-    <view style='margin-top:20rpx;position:relative'>
-      <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
-
-      <view class='record-list-item'>
-        <view class='record-list-info'>
-          <view class='record-item-avatar'>
-            <image src='../../images/img_car@2x.png'></image>
-          </view>
-          <view>
-            <view class='record-item-name'>Sam</view>
-            <view class='record-item-date'>2018.08.31</view>
-          </view>
-        </view>
-
-        <view class='record-item-points'>256</view>
-      </view>
-
-    </view>
-
-    <view style='margin-top:20rpx;position:relative'>
-      <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
-
-      <view class='record-list-item'>
-        <view class='record-list-info'>
-          <view class='record-item-avatar'>
-            <image src='../../images/img_car@2x.png'></image>
-          </view>
-          <view>
-            <view class='record-item-name'>Sam</view>
-            <view class='record-item-date'>2018.08.31</view>
-          </view>
-        </view>
-
-        <view class='record-item-points'>256</view>
-      </view>
-
-    </view>
-    <view style='margin-top:20rpx;position:relative'>
-      <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
-
-      <view class='record-list-item'>
-        <view class='record-list-info'>
-          <view class='record-item-avatar'>
-            <image src='../../images/img_car@2x.png'></image>
-          </view>
-          <view>
-            <view class='record-item-name'>Sam</view>
-            <view class='record-item-date'>2018.08.31</view>
-          </view>
-        </view>
-
-        <view class='record-item-points'>256</view>
-      </view>
-
-    </view>
-    <view style='margin-top:20rpx;position:relative'>
-      <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
-
-      <view class='record-list-item'>
-        <view class='record-list-info'>
-          <view class='record-item-avatar'>
-            <image src='../../images/img_car@2x.png'></image>
-          </view>
-          <view>
-            <view class='record-item-name'>Sam</view>
-            <view class='record-item-date'>2018.08.31</view>
-          </view>
-        </view>
-
-        <view class='record-item-points'>256</view>
-      </view>
-
-    </view>
-    <view style='margin-top:20rpx;position:relative'>
-      <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
-
-      <view class='record-list-item'>
-        <view class='record-list-info'>
-          <view class='record-item-avatar'>
-            <image src='../../images/img_car@2x.png'></image>
-          </view>
-          <view>
-            <view class='record-item-name'>Sam</view>
-            <view class='record-item-date'>2018.08.31</view>
-          </view>
-        </view>
-
-        <view class='record-item-points'>256</view>
-      </view>
-
-    </view>
-    <view style='margin-top:20rpx;position:relative'>
-      <image style='width:610rpx;height:134rpx;' src='../../images/record_bg3@2x.png'></image>
-
-      <view class='record-list-item'>
-        <view class='record-list-info'>
-          <view class='record-item-avatar'>
-            <image src='../../images/img_car@2x.png'></image>
-          </view>
-          <view>
-            <view class='record-item-name'>Sam</view>
-            <view class='record-item-date'>2018.08.31</view>
-          </view>
-        </view>
-
-        <view class='record-item-points'>256</view>
-      </view>
-
     </view>
   </view>
   <view catchtouchmove='true' style='position:absolute;top:72%;display:flex;justify-content:center;width:100%;'>
@@ -554,7 +231,7 @@
       <image style='width:438rpx;height:14rpx;' src='../../images/line2@2x.png'></image>
       <view style='margin-top:30rpx;position:relative'>
         <image style='width:308rpx;height:94rpx;' src='../../images/btn_yellow01@2x.png'></image>
-        <view style='position:absolute;top:0;display:flex;align-items:center;justify-content:center;width:100%;height:84rpx;'>
+        <view bindtap='touchEggHandle' style='position:absolute;top:0;display:flex;align-items:center;justify-content:center;width:100%;height:84rpx;'>
           <image style='width:48rpx;height:56rpx' src='../../images/img_egg2@2x.png'></image>
           <view style='color:#fff;font-size:15px'>砸金蛋</view>
         </view>
@@ -781,7 +458,7 @@
   <view class='close-btn' bindtap='closePopWin'>
     <image style='width:80rpx;height:80rpx;' src='../../images/icon_close@2x.png'></image>
   </view>
-  <image class='pop-win-bg' src='../../images/egg_bg_04@2x.png'>
+  <image bindtap='startEggHandle' class='pop-win-bg' src='../../images/egg_bg_04@2x.png'>
 
   </image>
   <view style='position:absolute;top:79%;left:50%;width:90%;color:#921D17;font-size:17px;text-align:center;transform:translate(-50%, -50%);'>

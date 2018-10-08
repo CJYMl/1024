@@ -6,10 +6,88 @@ const app = getApp()
 
 Page({
   data: {
-    motto: 'Hello World',
+    //用户游戏信息
+    userGameInfo: {},
+    touchRecords: {
+      self: {
+        "nickname": "nickname",
+        "avatar": "avatar",
+        "touchTime": 1538132079,
+        "step": '4'
+      },
+      list: [{
+          "nickname": "nickname",
+          "avatar": "avatar",
+          "touchTime": 1538132079,
+          "step": '2'
+        },
+        {
+          "nickname": "nickname",
+          "avatar": "avatar",
+          "touchTime": 1538132079,
+          "step": '2'
+        },
+        {
+          "nickname": "nickname",
+          "avatar": "avatar",
+          "touchTime": 1538132079,
+          "step": '2'
+        },
+      ]
+    },
+    prizeRecords: [{
+      "img": "img",
+      "title": "2000积分",
+      "drawTime": 1538132079
+    }, {
+      "img": "img",
+      "title": "1000积分",
+      "drawTime": 1538132079
+    }, {
+      "img": "img",
+      "title": "50积分",
+      "drawTime": 1538132079
+    }],
+    prizeList:[
+      {
+        "img": "img",
+        "title": "title"
+      },
+      {
+        "img": "img",
+        "title": "title"
+      },
+      {
+        "img": "img",
+        "title": "title"
+      },
+    ],
+    friendsDynamic: [{
+      nickname: "cjy",
+      avatar: "ds",
+      step: 2
+    }, {
+      nickname: "cjy",
+      avatar: "ds",
+      step: 256
+    }],
+    rankings: [{
+      "nickname": "nickname",
+      "avatar": "avatar",
+      "step": '4'
+    }, {
+      "nickname": "nickname",
+      "avatar": "avatar",
+      "step": '4'
+    }, {
+      "nickname": "nickname",
+      "avatar": "avatar",
+      "step": '4'
+    }],
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    token: wx.getStorageSync("token") || "",
     windowWidth: "",
     windowHeight: "",
     showMask: true,
@@ -18,34 +96,27 @@ Page({
     showRecord: false,
     showPengTip: false,
     showScratchTip: false,
-    showPengFail:false,
-    showPengSuccess:false,
-    showEgg:false,
-    showEggAward:false,
-    showShare:false,
-    showDownload:false,
-    showPrizeRecord:false,
-    showRanking:false,
-    isCanPeng: false  //是否能对碰
+    showPengFail: false,
+    showPengSuccess: false,
+    showEgg: false,
+    showEggAward: false,
+    showShare: false,
+    showDownload: false,
+    showPrizeRecord: false,
+    showRanking: false,
+    isCanPeng: false //是否能对碰
   },
-  //事件处理函数
-  bindViewTap: function () {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
-  onLoad: function (options) {
+  onLoad: function(options) {
     if (wx.getStorageSync("hasVisit")) {
       this.setData({
-        showMask:false,
-        showAuth:false
+        showMask: false,
+        showAuth: false
       })
     }
-    console.log(API)
+    this.initUserData()
     this.setSystemSize()
     this.initScratch()
     if (app.globalData.userInfo) {
-      console.log(app.globalData.userInfo)
       this.setData({
         userInfo: app.globalData.userInfo,
         hasUserInfo: true
@@ -72,21 +143,40 @@ Page({
       })
     }
   },
-  getUserInfo: function (e) {
-    console.log(e)
+  getUserInfo: function(e) {
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
-    wx.reLaunch({
-      url: '../../pages/guide1/guide1',
+    let {
+      token
+    } = this.data
+    //更新用户信息
+    let {
+      rawData,
+      iv,
+      signature,
+      encryptedData,
+      userInfo
+    } = e.detail
+    API.updateUserInfo({
+      rawData,
+      iv,
+      signature,
+      encryptedData,
+      userInfo
+    }, "post", token).then((data) => {
+      console.log(data)
     })
+    // wx.reLaunch({
+    //   url: '../../pages/guide1/guide1',
+    // })
     // wx.navigateTo({
     //   url: '/packageA/index/index',
     // })
   },
-  setSystemSize: function () {
+  setSystemSize: function() {
     let {
       windowHeight,
       windowWidth
@@ -96,8 +186,11 @@ Page({
       windowWidth: windowWidth
     })
   },
-  initScratch: function () {
-    let { windowHeight, windowWidth } = this.data
+  initScratch: function() {
+    let {
+      windowHeight,
+      windowWidth
+    } = this.data
     this.scratch = new Scratch(this, {
       canvasWidth: windowWidth * 0.72,
       canvasHeight: windowHeight * 0.2,
@@ -125,7 +218,7 @@ Page({
     })
     this.scratch.start()
   },
-  closePopWin: function () {
+  closePopWin: function() {
     this.setData({
       showMask: false,
       showScratch: false,
@@ -133,45 +226,90 @@ Page({
       showRecord: false,
       showPengTip: false,
       showScratchTip: false,
-      showPengFail:false,
-      showEgg:false,
-      showShare:false,
-      showEggAward:false,
-      showDownload:false,
-      showPengSuccess:false,
-      showPrizeRecord:false,
-      showRanking:false
+      showPengFail: false,
+      showEgg: false,
+      showShare: false,
+      showEggAward: false,
+      showDownload: false,
+      showPengSuccess: false,
+      showPrizeRecord: false,
+      showRanking: false
     })
   },
-  authHandle: function () {
+  authHandle: function() {
     this.closePopWin()
   },
-  showRecordHandle: function () {
+  showRecordHandle: function() {
+    let {
+      token
+    } = this.data
+    //对碰记录
+    API.getTouchList({}, "get", token).then((res) => {
+      if (res.data.retcode == 2000) {
+        that.setData({
+          touchRecords: res.data.data
+        })
+      } else {
+        wx.showToast({
+          title: res.data.info.msg,
+        })
+      }
+    })
     this.setData({
-      showMask:true,
+      showMask: true,
       showRecord: true
     })
   },
-  showPrizeRecordHandle:function(){
+  showPrizeRecordHandle: function() {
+    let {
+      token
+    } = this.data
+    //中奖记录
+    API.getPrizeRedcord({}, "get", token).then((res) => {
+      if (res.data.retcode == 2000) {
+        that.setData({
+          prizeRecords: res.data.data
+        })
+      } else {
+        wx.showToast({
+          title: res.data.info.msg,
+        })
+      }
+    })
     this.setData({
       showMask: true,
       showPrizeRecord: true
     })
   },
-  showRankingHandle:function(){
+  showRankingHandle: function() {
+    let {
+      token
+    } = this.data
+    //获取排行榜
+    API.getRanking({}, "get", token).then((res) => {
+      if (res.data.retcode == 2000) {
+        that.setData({
+          rankings: res.data.data
+        })
+      } else {
+        wx.showToast({
+          title: res.data.info.msg,
+        })
+      }
+    })
     this.setData({
       showMask: true,
       showRanking: true
     })
   },
-  startScratchHandle: function () {
+  startScratchHandle: function() {
     this.closePopWin();
     this.setData({
       showScratch: true,
       showMask: true
     })
   },
-  onShareAppMessage: function (res) {
+  onShareAppMessage: function(res) {
     if (res.from === 'button') {
       // 来自页面内转发按钮
       console.log(res.target)
@@ -183,18 +321,94 @@ Page({
     }
   },
   //点击分享
-  shareHandle:function(){
+  shareHandle: function() {
     this.setData({
       showShare: true,
       showMask: true
     })
   },
+  //点击砸金蛋
+  touchEggHandle:function(){
+    if (this.data.userGameInfo.step != 1024){
+      wx.showToast({
+        title: '只有到小组第一到达1024才能砸金蛋',
+      })
+      return
+    }
+    this.setData({
+      showRanking: false,
+      showEgg: true,
+      showMask: true
+    })
+  },
+  //点击金蛋
+  startEggHandle:function(){
+    this.setData({
+      showEggAward: true,
+      showEgg: false,
+      showMask: true
+    })
+  },
+  //开始刮奖
+  startScratch: function () {
+    this.setData({
+      showPrizeRecord: false,
+      showScratch: true,
+      showMask: true
+    })
+  },
   //下载陆金所
-  downloadHandle:function(){
-    console.log("ds")
+  downloadHandle: function() {
     this.setData({
       showDownload: true,
       showMask: true
+    })
+  },
+  //
+  initUserData: function() {
+    let {
+      token
+    } = this.data
+    //获取用户信息
+    let that = this
+    API.getUserInfo({}, "get", token).then((res) => {
+      //console.log(res.data.data)
+      if (res.data.retcode == 2000) {
+        console.log(that)
+        that.setData({
+          userGameInfo: res.data.data
+        })
+      
+      } else {
+        wx.showToast({
+          title: res.data.info.msg,
+        })
+      }
+    }),
+    
+    //获取好友动态
+    API.getFriendsDynamic({}, "get", token).then((res) => {
+      if (res.data.retcode == 2000) {
+        that.setData({
+          friendsDynamic: res.data.data
+        })
+      } else {
+        wx.showToast({
+          title: res.data.info.msg,
+        })
+      }
+    })
+    //获取奖品列表
+    API.getPrizeList({}, "get", token).then((res) => {
+      if (res.data.retcode == 2000) {
+        that.setData({
+          prizeList: res.data.data
+        })
+      } else {
+        wx.showToast({
+          title: res.data.info.msg,
+        })
+      }
     })
   }
 })
