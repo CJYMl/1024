@@ -2,33 +2,7 @@
 import API from "./api.js"
 App({
   onLaunch: function() {
-    // 登录
-    wx.login({
-      success: res => {
-        let token = ""
-        API.login({
-          jsCode: res.code
-        }, "post").then((res) => {
-
-          if (res.data.retcode == 2000) {
-            wx.setStorageSync("token", res.data.data.token)
-            token = res.data.data.token
-            console.log("token", token)
-
-            // //获取图片验证码
-            API.getPictureValidateCode({}, "get", token).then((data) => {
-              console.log(data)
-            })
-          } else {
-            wx.showToast({
-              title: '',
-            })
-          }
-        })
-
-        //发送 res.code 到后台换取 openId, sessionKey, unionId
-      }
-    })
+    
     // 获取用户信息
     wx.getSetting({
       success: res => {
@@ -49,17 +23,17 @@ App({
                 encryptedData,
                 userInfo
               } = res
-              API.updateUserInfo({
-                rawData,
-                iv,
-                signature,
-                encryptedData,
-                userInfo
-              }, "post", token).then((data) => {
-                console.log(data)
-              })
-              
-            
+              if(token){
+                API.updateUserInfo({
+                  rawData,
+                  iv,
+                  signature,
+                  encryptedData,
+                  userInfo
+                }, "post", token).then((data) => {
+                  console.log(data)
+                })
+              }
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
               if (this.userInfoReadyCallback) {

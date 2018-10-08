@@ -84,5 +84,6 @@ module.exports = {
   getPrizeList,
   getTouchList,
   getRanking,
-  validateUser
+  validateUser,
+  getFriendInfo
 }

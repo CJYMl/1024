@@ -2,7 +2,7 @@
 <import src="../../components/scratch/scratch.wxml" />
 <view class="container" style='overflow:auto;-webkit-overflow-scrolling: touch;width:{{windowWidth}}px;height:{{windowHeight}}px'>
   <view class='home-bg' style='width:{{windowWidth}}px;height:{{windowHeight*0.9}}px'>
-    <image style='width:{{windowWidth}}px;height:{{windowHeight*0.9}}px' src="../../images/home_2@2x.png"></image>
+    <image style='width:{{windowWidth}}px;height:{{windowHeight*0.9}}px' src='{{homeBg[0]}}'></image>
     <view class="userinfo">
       <block>
         <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
@@ -24,7 +24,7 @@
     <view class='navibar'>
       <image bindtap='showRankingHandle' src='../../images/icon_list@2x.png'></image>
       <image bindtap='showPrizeRecordHandle' src='../../images/icon_record@2x.png'></image>
-      <image src='../../images/icon_ld@2x.png'></image>
+      <image bindtap='startScratchHandle' src='../../images/icon_ld@2x.png'></image>
     </view>
     <view class='share-box' bindtap='shareHandle'></view>
   </view>
@@ -256,34 +256,34 @@
     <view class='tip-info' style="width:60%">
       <view>
         <view class='tip-info-mine'>
-          256
+          {{friendInfo.step}}
         </view>
-        <view class='tip-info-name'>Sam</view>
+        <view class='tip-info-name'>{{friendInfo.nickname}}</view>
       </view>
       <view class='tip-info-VS'>VS</view>
       <view>
-        <view class='tip-info-enemy'>1024</view>
-        <view class='tip-info-name'>小王子</view>
+        <view class='tip-info-enemy'>{{userGameInfo.step}}</view>
+        <view class='tip-info-name'>{{userGameInfo.nickname}}</view>
       </view>
     </view>
-    <view class='tip-info-dialog'> {{isCanPeng ? "您有好友发来邀请，是否对碰？": "您有好友数字不一致，无法对碰哦"}}</view>
+    <view class='tip-info-dialog'> {{friendInfo.step == userGameInfo.step ? "您有好友发来邀请，是否对碰？": "您有好友数字不一致，无法对碰哦"}}</view>
   </view>
   <view>
 
-    <view wx:if="{{isCanPeng}}" class='tip-info-group'>
+    <view wx:if="{{friendInfo.step == userGameInfo.step}}" class='tip-info-group'>
       <view style='position:relative'>
         <image style='width:308rpx;height:94rpx;' src='../../images/btn_yellow01@2x.png'></image>
-        <view style='position:absolute;top:50%;left:40%;transform: translate(-50%, -50%);font-size:16px;color:#fff'>碰</view>
+        <view bindtap='startPenghandle' style='position:absolute;top:50%;left:40%;transform: translate(-50%, -50%);font-size:16px;color:#fff'>碰</view>
       </view>
       <view style='position:relative'>
         <image style='width:308rpx;height:94rpx;' src='../../images/btn_green01@2x.png'></image>
-        <view style='position:absolute;top:40%;left:50%;transform: translate(-50%, -50%);width:100%;font-size:16px;color:#fff'>哼，就是不碰</view>
+        <view bindtap='closePopWin' style='position:absolute;top:40%;left:50%;transform: translate(-50%, -50%);width:100%;font-size:16px;color:#fff'>哼，就是不碰</view>
       </view>
     </view>
     <view wx:else class='tip-info-group-no-peng'>
       <view style='position:relative'>
         <image style='width:308rpx;height:94rpx;' src='../../images/btn_green01@2x.png'></image>
-        <view style='position:absolute;top:40%;left:50%;transform: translate(-50%, -50%);font-size:16px;color:#fff'>重新对碰</view>
+        <view bindtap='closePopWin' style='position:absolute;top:40%;left:50%;transform: translate(-50%, -50%);font-size:16px;color:#fff'>重新对碰</view>
       </view>
     </view>
   </view>
@@ -310,22 +310,22 @@
     <view class='tip-info-group' style='top:81%'>
       <view style='position:relative'>
         <image style='width:308rpx;height:94rpx;' src='../../images/btn_yellow01@2x.png'></image>
-        <view style='position:absolute;top:50%;left:50%;width:90%;transform: translate(-50%, -50%);font-size:16px;color:#fff;display:flex;justify-content:center;align-items:center}'>
-          <view>
+        <button plain='true' style='position:absolute;top:45%;left:50%;width:308rpx;transform: translate(-50%, -50%);font-size:16px;color:#fff;display:flex;justify-content:center;align-items:center}'>
+          <view style='display:flex;align-items:center'>
             <image style='width:40rpx;height:40rpx;' src='../../images/icon_moments@2x.png'></image>
           </view>
           <view>分享到朋友圈</view>
-        </view>
+        </button>
 
       </view>
       <view style='position:relative'>
         <image style='width:308rpx;height:94rpx;' src='../../images/btn_green01@2x.png'></image>
-        <view style='position:absolute;top:50%;left:50%;width:90%;transform: translate(-50%, -50%);font-size:16px;color:#fff;display:flex;justify-content:center;align-items:center}'>
-          <view>
+        <button plain='true' open-type='share' style='position:absolute;top:45%;left:50%;width:308rpx;transform: translate(-50%, -50%);font-size:16px;color:#fff;display:flex;justify-content:center;align-items:center}'>
+          <view style='display:flex;align-items:center'>
             <image style='width:40rpx;height:40rpx;' src='../../images/icon_wechat@2x.png'></image>
           </view>
           <view>分享到微信</view>
-        </view>
+        </button>
       </view>
     </view>
   </view>

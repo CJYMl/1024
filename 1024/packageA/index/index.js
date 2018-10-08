@@ -48,8 +48,7 @@ Page({
       "title": "50积分",
       "drawTime": 1538132079
     }],
-    prizeList:[
-      {
+    prizeList: [{
         "img": "img",
         "title": "title"
       },
@@ -84,10 +83,24 @@ Page({
       "avatar": "avatar",
       "step": '4'
     }],
+    homeBg: [
+      "../../images/home_2@2x.png",
+      "../../images/home_4@2x.png",
+      "./img/home_8@2x.png",
+      "./img/home_16@2x.png",
+      "./img/home_32@2x.png",
+      "./img/home_64@2x.png",
+      "./img/home_128@2x.png",
+      "./img/home_256@2x.png",
+      "./img/home_512@2x.png",
+      "./img/home_1024@2x.png",
+    ],
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     token: wx.getStorageSync("token") || "",
+    friendId: "",
+    friendInfo: {},
     windowWidth: "",
     windowHeight: "",
     showMask: true,
@@ -107,10 +120,19 @@ Page({
     isCanPeng: false //是否能对碰
   },
   onLoad: function(options) {
+    console.log(options)
     if (wx.getStorageSync("hasVisit")) {
       this.setData({
         showMask: false,
         showAuth: false
+      })
+   }
+    if (options && options.friendId) {
+      console.log("get friendId")
+      this.setData({
+        friendId: options.friendId,
+        showMask: true,
+        showPengTip: true
       })
     }
     this.initUserData()
@@ -152,6 +174,8 @@ Page({
     let {
       token
     } = this.data
+
+    console.log(token)
     //更新用户信息
     let {
       rawData,
@@ -160,20 +184,53 @@ Page({
       encryptedData,
       userInfo
     } = e.detail
+    let that = this
     API.updateUserInfo({
       rawData,
       iv,
       signature,
       encryptedData,
       userInfo
-    }, "post", token).then((data) => {
-      console.log(data)
+    }, "post", token).then((res) => {
+      if(res.data.retcode == 2000){
+        API.getUserInfo({}, "get", token).then((res) => {
+          //console.log(res.data.data)
+          if (res.data.retcode == 2000) {
+            console.log(res.data.data)
+            that.setData({
+              userGameInfo: res.data.data
+            })
+            // //获取好友信息
+            // if (friendId) {
+            //   API.getFriendInfo({
+            //     friendId,
+            //     playId: res.data.data.playId
+            //   }, "get", token).then((res) => {
+            //     if (res.data.retcode == 2000) {
+            //       that.setData({
+            //         friendInfo: res.data.data
+            //       })
+            //     } else {
+            //       wx.showToast({
+            //         title: res.data.info.msg,
+            //       })
+            //     }
+            //   })
+            // }
+          } else {
+            wx.showToast({
+              title: res.data.info.msg,
+            })
+          }
+        });
+      }
     })
-    // wx.reLaunch({
-    //   url: '../../pages/guide1/guide1',
-    // })
+    wx.reLaunch({
+      url: '../../pages/guide1/guide1',
+    })
     // wx.navigateTo({
-    //   url: '/packageA/index/index',
+
+    //   url: '/packageA/index/index?friendId=' + this.data.userGameInfo.playId,
     // })
   },
   setSystemSize: function() {
@@ -267,7 +324,7 @@ Page({
     //中奖记录
     API.getPrizeRedcord({}, "get", token).then((res) => {
       if (res.data.retcode == 2000) {
-        that.setData({
+        this.setData({
           prizeRecords: res.data.data
         })
       } else {
@@ -313,10 +370,14 @@ Page({
     if (res.from === 'button') {
       // 来自页面内转发按钮
       console.log(res.target)
+      this.setData({
+        showShare: false,
+        showMask: false
+      })
     }
     return {
       title: '碰碰1024',
-      path: '/packageA/index/index',
+      path: '/packageA/index/index?friendId=' + this.data.userGameInfo.userId,
       imageUrl: '../../images/share@2x.png',
     }
   },
@@ -327,11 +388,54 @@ Page({
       showMask: true
     })
   },
+  //开始对碰
+  startPenghandle: function() {
+    let {
+      friendId,
+      userGameInfo
+    } = this.data
+    let that = this
+    //获取好友信息
+    API.startPeng({
+      friendId,
+      playId: userGameInfo.userId+""
+    }, "get", token).then((res) => {
+      if (res.data.retcode == 2000) {
+        that.initUserData()
+        that.setData({
+          showMask:true,
+          showPengTip:false,
+          showPengSuccess:true
+        })
+      } else {
+        if (res.data.info.errCode == 310006006){
+          that.setData({
+            showMask: true,
+            showPengTip: false,
+            showPengFail: true
+          })
+        }else{
+          wx.showToast({
+            title: res.data.info.msg,
+          }) 
+        }
+      }
+    })
+  },
   //点击砸金蛋
-  touchEggHandle:function(){
-    if (this.data.userGameInfo.step != 1024){
-      wx.showToast({
-        title: '只有到小组第一到达1024才能砸金蛋',
+  touchEggHandle: function() {
+    if (this.data.userGameInfo.step != 1024) {
+      wx.showModal({
+        title: '提示',
+        content: `只有到小组第一到达1024才能砸金蛋`,
+        showCancel: false,
+        success: res => {
+          if (res.confirm) {
+            console.log('用户点击确定')
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
       })
       return
     }
@@ -342,7 +446,7 @@ Page({
     })
   },
   //点击金蛋
-  startEggHandle:function(){
+  startEggHandle: function() {
     this.setData({
       showEggAward: true,
       showEgg: false,
@@ -350,7 +454,7 @@ Page({
     })
   },
   //开始刮奖
-  startScratch: function () {
+  startScratch: function() {
     this.setData({
       showPrizeRecord: false,
       showScratch: true,
@@ -367,48 +471,90 @@ Page({
   //
   initUserData: function() {
     let {
-      token
+      token,
+      friendId,
     } = this.data
-    //获取用户信息
-    let that = this
-    API.getUserInfo({}, "get", token).then((res) => {
-      //console.log(res.data.data)
-      if (res.data.retcode == 2000) {
-        console.log(that)
-        that.setData({
-          userGameInfo: res.data.data
+    // 登录
+    wx.login({
+      success: res => {
+        let token = ""
+        API.login({
+          jsCode: res.code
+        }, "post").then((res) => {
+          
+          if (res.data.retcode == 2000) {
+            wx.setStorageSync("token", res.data.data.token)
+            
+            token = res.data.data.token
+            //获取用户信息
+            let that = this
+            that.setData({
+              token
+            })
+            API.getUserInfo({}, "get", token).then((res) => {
+              //console.log(res.data.data)
+              if (res.data.retcode == 2000) {
+                console.log(res.data.data)
+                that.setData({
+                  userGameInfo: res.data.data
+                })
+                //获取好友信息
+                if (friendId) {
+                  API.getFriendInfo({
+                    friendId,
+                    playId: res.data.data.playId
+                  }, "get", token).then((res) => {
+                    if (res.data.retcode == 2000) {
+                      that.setData({
+                        friendInfo: res.data.data
+                      })
+                    } else {
+                      wx.showToast({
+                        title: res.data.info.msg,
+                      })
+                    }
+                  })
+                }
+              } else {
+                wx.showToast({
+                  title: res.data.info.msg,
+                })
+              }
+            }),
+
+              //获取好友动态
+              API.getFriendsDynamic({}, "get", token).then((res) => {
+                if (res.data.retcode == 2000) {
+                  that.setData({
+                    friendsDynamic: res.data.data
+                  })
+                } else {
+                  wx.showToast({
+                    title: res.data.info.msg,
+                  })
+                }
+              })
+            //获取奖品列表
+            API.getPrizeList({}, "get", token).then((res) => {
+              if (res.data.retcode == 2000) {
+                that.setData({
+                  prizeList: res.data.data
+                })
+              } else {
+                wx.showToast({
+                  title: res.data.info.msg,
+                })
+              }
+            })
+          } else {
+            wx.showToast({
+              title: '',
+            })
+          }
         })
-      
-      } else {
-        wx.showToast({
-          title: res.data.info.msg,
-        })
-      }
-    }),
-    
-    //获取好友动态
-    API.getFriendsDynamic({}, "get", token).then((res) => {
-      if (res.data.retcode == 2000) {
-        that.setData({
-          friendsDynamic: res.data.data
-        })
-      } else {
-        wx.showToast({
-          title: res.data.info.msg,
-        })
+        //发送 res.code 到后台换取 openId, sessionKey, unionId
       }
     })
-    //获取奖品列表
-    API.getPrizeList({}, "get", token).then((res) => {
-      if (res.data.retcode == 2000) {
-        that.setData({
-          prizeList: res.data.data
-        })
-      } else {
-        wx.showToast({
-          title: res.data.info.msg,
-        })
-      }
-    })
+   
   }
 })
