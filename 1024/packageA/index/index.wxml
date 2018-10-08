@@ -272,17 +272,17 @@
 
     <view wx:if="{{friendInfo.step == userGameInfo.step}}" class='tip-info-group'>
       <view style='position:relative'>
-        <image style='width:308rpx;height:94rpx;' src='../../images/btn_yellow01@2x.png'></image>
+        <image bindtap='startPenghandle' style='width:308rpx;height:94rpx;' src='../../images/btn_yellow01@2x.png'></image>
         <view bindtap='startPenghandle' style='position:absolute;top:50%;left:40%;transform: translate(-50%, -50%);font-size:16px;color:#fff'>碰</view>
       </view>
       <view style='position:relative'>
-        <image style='width:308rpx;height:94rpx;' src='../../images/btn_green01@2x.png'></image>
+        <image bindtap='closePopWin' style='width:308rpx;height:94rpx;' src='../../images/btn_green01@2x.png'></image>
         <view bindtap='closePopWin' style='position:absolute;top:40%;left:50%;transform: translate(-50%, -50%);width:100%;font-size:16px;color:#fff'>哼，就是不碰</view>
       </view>
     </view>
     <view wx:else class='tip-info-group-no-peng'>
       <view style='position:relative'>
-        <image style='width:308rpx;height:94rpx;' src='../../images/btn_green01@2x.png'></image>
+        <image bindtap='closePopWin' style='width:308rpx;height:94rpx;' src='../../images/btn_green01@2x.png'></image>
         <view bindtap='closePopWin' style='position:absolute;top:40%;left:50%;transform: translate(-50%, -50%);font-size:16px;color:#fff'>重新对碰</view>
       </view>
     </view>
@@ -415,9 +415,9 @@
       </image>
     </view>
     <view style='text-align:center;position:relative'>
-      <image style='width:302rpx;height:94rpx' src='../../images/btn_blue02@2x.png'>
+      <image bindtap='closePopWin' style='width:302rpx;height:94rpx' src='../../images/btn_blue02@2x.png'>
       </image>
-      <view style='position:absolute;color:#fff;top:0;top:50%;left:50%;transform: translate(-50%, -50%);font-size:15px'>重新对碰</view>
+      <view bindtap='closePopWin' style='position:absolute;color:#fff;top:0;top:50%;left:50%;transform: translate(-50%, -50%);font-size:15px'>重新对碰</view>
     </view>
   </view>
 
@@ -440,12 +440,14 @@
     <view style='text-align:center;position:relative'>
       <image style='width:326rpx;height:326rpx;' src='../../images/img_ray@2x.png'>
       </image>
-      <image style='width:102rpx;height:158rpx;position:absolute;top:50%;left:50%;transform: translate(-50%, -50%);' src='../../images/4@2x.png'></image>
+      <view style='position:absolute;top:50%;left:50%;transform: translate(-50%, -50%);width:100%'>
+        <image wx:for="{{stepNumber}}" wx:key="index" style='width:102rpx;height:158rpx;' src='../../images/{{item}}@2x.png'></image>
+      </view>
     </view>
     <view style='text-align:center;position:relative'>
-      <image style='width:302rpx;height:94rpx' src='../../images/btn_yellow02@2x.png'>
+      <image bindtap='startScratchHandle' style='width:302rpx;height:94rpx' src='../../images/btn_yellow02@2x.png'>
       </image>
-      <view style='position:absolute;color:#fff;top:50%;left:50%;transform: translate(-50%, -50%);font-size:15px'>立即刮奖</view>
+      <view bindtap='startScratchHandle' style='position:absolute;color:#fff;top:50%;left:50%;transform: translate(-50%, -50%);font-size:15px'>立即刮奖</view>
     </view>
   </view>
 

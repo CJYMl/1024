@@ -110,14 +110,15 @@ Page({
     showPengTip: false,
     showScratchTip: false,
     showPengFail: false,
-    showPengSuccess: false,
+    showPengSuccess: true,
     showEgg: false,
     showEggAward: false,
     showShare: false,
     showDownload: false,
     showPrizeRecord: false,
     showRanking: false,
-    isCanPeng: false //是否能对碰
+    isCanPeng: false, //是否能对碰,
+    stepNumber:'526'
   },
   onLoad: function(options) {
     console.log(options)
@@ -253,7 +254,7 @@ Page({
       canvasHeight: windowHeight * 0.2,
       imageResource: '../../images/card_img03@2x.png',
       maskColor: 'red',
-      r: 4,
+      r: 15,
       awardTxt: '中大奖',
       awardTxtColor: '#ccc',
       awardTxtFontSize: '24px',
@@ -273,7 +274,8 @@ Page({
         })
       }
     })
-    this.scratch.start()
+    this.scratch.restart()
+    //this.scratch.start()
   },
   closePopWin: function() {
     this.setData({
@@ -365,6 +367,7 @@ Page({
       showScratch: true,
       showMask: true
     })
+    this.initScratch()
   },
   onShareAppMessage: function(res) {
     if (res.from === 'button') {
@@ -388,18 +391,20 @@ Page({
       showMask: true
     })
   },
-  //开始对碰
+  //点击对碰
   startPenghandle: function() {
     let {
+      token,
       friendId,
       userGameInfo
     } = this.data
     let that = this
+    console.log("peng")
     //获取好友信息
     API.startPeng({
       friendId,
-      playId: userGameInfo.userId+""
-    }, "get", token).then((res) => {
+      playId: userGameInfo.playId+""
+    }, "post", token).then((res) => {
       if (res.data.retcode == 2000) {
         that.initUserData()
         that.setData({
@@ -460,6 +465,7 @@ Page({
       showScratch: true,
       showMask: true
     })
+    this.initScratch()
   },
   //下载陆金所
   downloadHandle: function() {
@@ -477,6 +483,7 @@ Page({
     // 登录
     wx.login({
       success: res => {
+        console.log("code",res.code)
         let token = ""
         API.login({
           jsCode: res.code

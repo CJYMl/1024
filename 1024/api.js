@@ -85,5 +85,6 @@ module.exports = {
   getTouchList,
   getRanking,
   validateUser,
-  getFriendInfo
+  getFriendInfo,
+  startPeng
 }

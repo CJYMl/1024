@@ -85,9 +85,9 @@ class Scratch {
          
           self.ctx.drawImage(imageResource, 0, 0, canvasWidth, canvasHeight)
              self.ctx.draw()
-           
-        } else {
           console.log("test")
+        } else {
+         
           self.ctx.setFillStyle(maskColor)
             self.ctx.fillRect(0, 0, canvasWidth, canvasHeight)
             self.ctx.draw()
@@ -154,7 +154,7 @@ class Scratch {
         if (!this.isStart) return
         // 自动清楚采用点范围值方式判断
         const { canvasWidth, canvasHeight, minX, minY, maxX, maxY } = this
-        if (maxX - minX > .7 * canvasWidth && maxY - minY > .7 * canvasHeight) {
+        if (maxX - minX > .3 * canvasWidth && maxY - minY > .3 * canvasHeight) {
             this.ctx.draw()
             this.endCallBack && this.endCallBack()
             this.isStart = false
