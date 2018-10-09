@@ -1,5 +1,4 @@
 /**index.wxss**/
-
 .home-bg {
   position: relative;
 }
@@ -91,6 +90,8 @@
   color: #be7066;
   background: #f5d8a5;
   text-align: center;
+  height: 40rpx;
+  line-height: 40rpx
 }
 
 .friends-dynamic-info {
@@ -122,7 +123,7 @@
   justify-content: space-between;
 }
 
-.navibar > image {
+.navibar  image {
   display: inline-block;
   width: 130rpx;
   height: 130rpx;
@@ -448,11 +449,12 @@ button[plain] {
 }
 
 .record-item-avatar {
-  width: 104rpx;
-  height: 104rpx;
-  border-radius: 52rpx;
+  width: 90rpx;
+  height: 90rpx;
+  border-radius: 50rpx;
   border: 1px solid #e5c7a5;
   margin-right: 20rpx;
+  overflow: hidden
 }
 
 .record-list-info {
@@ -462,8 +464,8 @@ button[plain] {
 }
 
 .record-item-avatar >image {
-  width: 104rpx;
-  height: 104rpx;
+  width: 90rpx;
+  height: 90rpx;
 }
 
 .record-item-name {
@@ -511,7 +513,7 @@ button[plain] {
   text-align: center;
   line-height: 104rpx;
   color: #713533;
-  background: #fcde7e;
+
 }
 
 .tip-info-enemy {
@@ -521,7 +523,7 @@ button[plain] {
   text-align: center;
   line-height: 104rpx;
   color: #713533;
-  background: #fcde7e;
+
 }
 
 .tip-info-VS {
@@ -544,8 +546,20 @@ button[plain] {
   font-size: 16px;
   color: #921d17;
   text-align: center;
+  width: 120rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
-
+.preventTouchMove{
+    top: 0px ; 
+    left:   0px ; 
+    width:   100% ; 
+    height:   100% ; 
+    overflow:   hidden ; 
+    position:   fixed ; 
+    z-index:   0 ; 
+}
 .tip-info-group {
   position: absolute;
   top: 85%;

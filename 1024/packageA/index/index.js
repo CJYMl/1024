@@ -2,12 +2,14 @@
 //获取应用实例
 import Scratch from "../../components/scratch/scratch.js"
 import API from "../../api.js"
+import formatTime from "../../utils/util.js"
 const app = getApp()
 
 Page({
   data: {
     //用户游戏信息
     userGameInfo: {},
+    formatTime,
     touchRecords: {
       self: {
         "nickname": "nickname",
@@ -78,11 +80,11 @@ Page({
       "nickname": "nickname",
       "avatar": "avatar",
       "step": '4'
-    }, {
-      "nickname": "nickname",
-      "avatar": "avatar",
-      "step": '4'
-    }],
+      },{
+        "nickname": "nickname",
+        "avatar": "avatar",
+        "step": '4'
+      }],
     homeBg: [
       "../../images/home_2@2x.png",
       "../../images/home_4@2x.png",
@@ -110,7 +112,7 @@ Page({
     showPengTip: false,
     showScratchTip: false,
     showPengFail: false,
-    showPengSuccess: true,
+    showPengSuccess: false,
     showEgg: false,
     showEggAward: false,
     showShare: false,
@@ -118,10 +120,10 @@ Page({
     showPrizeRecord: false,
     showRanking: false,
     isCanPeng: false, //是否能对碰,
-    stepNumber:'526'
+    stepNumber:'526',
+    rankingValue:""
   },
   onLoad: function(options) {
-    console.log(options)
     if (wx.getStorageSync("hasVisit")) {
       this.setData({
         showMask: false,
@@ -166,6 +168,7 @@ Page({
       })
     }
   },
+  preventTouchMove() { },
   getUserInfo: function(e) {
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
@@ -247,34 +250,47 @@ Page({
   initScratch: function() {
     let {
       windowHeight,
-      windowWidth
+      windowWidth,
+      token,
     } = this.data
-    this.scratch = new Scratch(this, {
-      canvasWidth: windowWidth * 0.72,
-      canvasHeight: windowHeight * 0.2,
-      imageResource: '../../images/card_img03@2x.png',
-      maskColor: 'red',
-      r: 15,
-      awardTxt: '中大奖',
-      awardTxtColor: '#ccc',
-      awardTxtFontSize: '24px',
-      callback: () => {
-        wx.showModal({
-          title: '提示',
-          content: `您中奖了`,
-          showCancel: false,
-          success: res => {
-            //this.scratch.reset()
-            if (res.confirm) {
-              console.log('用户点击确定')
-            } else if (res.cancel) {
-              console.log('用户点击取消')
-            }
+    //获取好友动态
+    let that = this
+    API.lottery({type:"1"}, "post", token).then((res) => {
+      if (res.data.retcode == 2000) {
+        that.scratch = new Scratch(that, {
+          canvasWidth: windowWidth * 0.72,
+          canvasHeight: windowHeight * 0.2,
+          imageResource: res.data.data.img,
+          maskColor: 'red',
+          r: 15,
+          awardTxt: '中大奖',
+          awardTxtColor: '#ccc',
+          awardTxtFontSize: '24px',
+          callback: () => {
+            wx.showModal({
+              title: '提示',
+              content: `您中奖了`,
+              showCancel: false,
+              success: res => {
+                //this.scratch.reset()
+                if (res.confirm) {
+                  console.log('用户点击确定')
+                } else if (res.cancel) {
+                  console.log('用户点击取消')
+                }
+              }
+            })
           }
+        })
+        that.scratch.restart()
+      } else {
+        wx.showToast({
+          title: res.data.info.msg,
         })
       }
     })
-    this.scratch.restart()
+
+    
     //this.scratch.start()
   },
   closePopWin: function() {
@@ -302,6 +318,7 @@ Page({
     let {
       token
     } = this.data
+    let that = this
     //对碰记录
     API.getTouchList({}, "get", token).then((res) => {
       if (res.data.retcode == 2000) {
@@ -344,11 +361,12 @@ Page({
     let {
       token
     } = this.data
+    let that = this 
     //获取排行榜
     API.getRanking({}, "get", token).then((res) => {
       if (res.data.retcode == 2000) {
         that.setData({
-          rankings: res.data.data
+          //rankings: res.data.data
         })
       } else {
         wx.showToast({
@@ -410,7 +428,9 @@ Page({
         that.setData({
           showMask:true,
           showPengTip:false,
-          showPengSuccess:true
+          showPengSuccess:true,
+          rankingValue: res.data.data.ranking,
+          stepNumber:res.data.data.step+""
         })
       } else {
         if (res.data.info.errCode == 310006006){

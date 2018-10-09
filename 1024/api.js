@@ -86,5 +86,6 @@ module.exports = {
   getRanking,
   validateUser,
   getFriendInfo,
-  startPeng
+  startPeng,
+  lottery
 }
