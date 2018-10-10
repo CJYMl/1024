@@ -18,7 +18,7 @@
     <view class='friends-dynamic'>
       <view class='friends-dynamic-title'>好友动态</view>
       <view class='friends-dynamic-info'>
-        <view wx:for='{{friendsDynamic}}' wx:key="unique">{{item.nickname}}对碰成{{item.step}}</view>
+        <view wx:for='{{friendsDynamic}}' wx:key="index">{{item.nickname}}对碰成{{item.step}}</view>
       </view>
     </view>
     <view class='navibar'>
@@ -90,6 +90,9 @@
   </image>
   <view class='scratch-wrap'>
     <template is="scratch" data="{{scratch, isScroll}}"></template>
+  </view>
+  <view style='width:100%;position:absolute;top:77%;left:50%;text-align:right;padding-right:160rpx;transform: translate(-50%, -50%);color:#fff;font-size:15px'>您还有{{drawTimes}}次机会
+    <text wx:if="{{drawTimes > 0}}" bindtap='resetScratchHandle' style='color:blue'>,继续刮</text>
   </view>
 </view>
 
@@ -194,10 +197,10 @@
     <view style='height:328rpx;text-align:center'>
       <image style='width:438rpx;height:14rpx;' src='../../images/line2@2x.png'></image>
       <view style='margin-top:30rpx;position:relative'>
-        <image style='width:308rpx;height:94rpx;' src='../../images/btn_yellow01@2x.png'></image>
-        <view style='position:absolute;top:0;display:flex;align-items:center;justify-content:center;width:100%;height:84rpx;'>
+        <image bindtap='startScratchHandle' style='width:308rpx;height:94rpx;' src='../../images/btn_yellow01@2x.png'></image>
+        <view bindtap='startScratchHandle' style='position:absolute;top:0;display:flex;align-items:center;justify-content:center;width:100%;height:84rpx;'>
 
-          <view bindtap='startScratch' style='color:#fff;font-size:15px'>刮奖</view>
+          <view  style='color:#fff;font-size:15px'>刮奖</view>
         </view>
         <view style='color:#FAECD3;font-size:14px'>您还有{{userGameInfo.drawTimes}}次刮奖的机会呦～</view>
       </view>
@@ -220,7 +223,10 @@
         <view class='record-list-item'>
 
           <view class='record-list-info'>
-            <view style='margin-right:46rpx;color:#fff;text-shadow:0px 0px 2px #B96F1F;'>{{index+1}}</view>
+            <view style='margin-right:46rpx;color:#fff;text-shadow:0px 0px 2px #B96F1F;'>
+               <image wx:if="{{index < 3}}" style='width:32rpx;height:32rpx' src='../../images/{{index+1}}{{index+1}}@2x.png'></image>
+               <text wx:else>{{index + 1}}</text>
+            </view>
             <view class='record-item-avatar'>
               <image src='{{item.avatar}}'></image>
             </view>
@@ -266,6 +272,9 @@
       <view style='display:flex;flex-direction:column;justify-content:center;align-items:center;'>
         <view class='tip-info-mine' style='position:relative'>
           <image style='width:104rpx;height:104rpx;' src='../../images/step_bg@2x.png'></image>
+          <view style='position:absolute;width:42rpx;height:42rpx;border-radius:21px;border:1px solid #E5C7A5;left:-10rpx;top:-10rpx;overflow:hidden;display:flex;align-items:center;justify-content: center;'>
+            <image style='width:42rpx;height:42rpx;' src='{{friendInfo.avatar}}'></image>
+          </view>
           <view style='position:absolute;top:50%;left:50%;transform: translate(-50%, -50%);'> {{friendInfo.step}}</view>
         </view>
         <view class='tip-info-name'>{{friendInfo.nickname}}</view>
@@ -273,6 +282,9 @@
       <view class='tip-info-VS'>VS</view>
       <view style='display:flex;flex-direction:column;justify-content:center;align-items:center;'>
         <view class='tip-info-enemy' style='position:relative'>
+          <view style='position:absolute;width:42rpx;height:42rpx;border-radius:21px;border:1px solid #E5C7A5;left:-10rpx;top:-10rpx;overflow:hidden;display:flex;align-items:center;justify-content: center;'>
+            <image style='width:42rpx;height:42rpx;' src='{{userGameInfo.avatar}}'></image>
+          </view>
           <image style='width:104rpx;height:104rpx;' src='../../images/step_bg@2x.png'></image>
           <view style='position:absolute;top:50%;left:50%;transform: translate(-50%, -50%);'>{{userGameInfo.step}}</view>
         </view>
@@ -286,7 +298,7 @@
     <view wx:if="{{friendInfo.step == userGameInfo.step}}" class='tip-info-group'>
       <view style='position:relative'>
         <image bindtap='startPenghandle' style='width:308rpx;height:94rpx;' src='../../images/btn_yellow01@2x.png'></image>
-        <view bindtap='startPenghandle' style='position:absolute;top:50%;left:40%;transform: translate(-50%, -50%);font-size:16px;color:#fff'>碰</view>
+        <view bindtap='startPenghandle' style='position:absolute;top:40%;left:50%;transform: translate(-50%, -50%);font-size:16px;color:#fff'>碰</view>
       </view>
       <view style='position:relative'>
         <image bindtap='closePopWin' style='width:308rpx;height:94rpx;' src='../../images/btn_green01@2x.png'></image>
@@ -314,7 +326,7 @@
   <view class='tip-info-wrap'>
 
     <view class='tip-info' style='justify-content:center;color:#BE7066;font-size:100px;font-weight:bold;top:48%'>
-      <view>2</view>
+      <view>{{userGameInfo.step}}</view>
     </view>
     <view class='tip-info-dialog' style='font-size:15px;top:65%;'>对碰数字，获得奖励升级</view>
   </view>

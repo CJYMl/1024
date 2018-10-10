@@ -169,17 +169,24 @@
 }
 
 .prize-info-item {
-  height: 100%;
+  height: 184rpx;
   flex: 1;
   display: flex;
   font-size: 11px;
   text-align: center;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
   color: #965d07;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
-
+.prize-info-item > view {
+  margin-left: 10rpx;
+}
+.prize-info-item > view:nth-child(1) {
+  margin-left:0rpx;
+}
 .prize-image-wrap {
   color: #965d07;
   font-size: 11px;

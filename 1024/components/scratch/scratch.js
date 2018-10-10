@@ -44,6 +44,7 @@ class Scratch {
         this.canvasHeight = opts.canvasHeight
         this.imageResource = opts.imageResource
         this.maskColor = opts.maskColor
+       
         // this.canvasId = opts.canvasId
         this.r = opts.r || 4
         this.endCallBack = opts.callback
@@ -69,7 +70,11 @@ class Scratch {
                 'awardTxtLineHeight': opts.canvasHeight,
                 'width': opts.canvasWidth,
                 'height': opts.canvasHeight,
-                'imageResource': opts.imageResource
+                "img": opts.img,
+                "title": opts.title,
+                "isMember": opts.isMember,
+                'imageResource': opts.imageResource,
+                "status":opts.status
             },
             'isScroll': true
         })
@@ -82,10 +87,8 @@ class Scratch {
         this.ctx.clearRect(0, 0, canvasWidth, canvasHeight)
         
         if (imageResource && imageResource != '') {
-         
           self.ctx.drawImage(imageResource, 0, 0, canvasWidth, canvasHeight)
-             self.ctx.draw()
-          console.log("test")
+          self.ctx.draw()
         } else {
          
           self.ctx.setFillStyle(maskColor)

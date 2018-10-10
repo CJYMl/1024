@@ -34,7 +34,7 @@ Page({
   toHome:function(){
     wx.setStorageSync("hasVisit", true)
     wx.navigateTo({
-      url: '../../packageA/index/index?hasVisit=true',
+      url: '../../packageA/index/index?hasCome=true',
     })
  
   },

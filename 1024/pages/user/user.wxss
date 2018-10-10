@@ -46,6 +46,7 @@ input {
   height: 100%;
   border-radius: 2px;
   padding-left: 104rpx;
+  padding-right: 104rpx;
   color: #cecece;
   box-sizing: border-box;
   flex: 1

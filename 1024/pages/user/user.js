@@ -12,6 +12,7 @@ Page({
     validCodeSvg: "",
     token: wx.getStorageSync("token") || "",
     picCode: "",
+    phone:"",
     phoneCode: ""
   },
 
@@ -20,6 +21,12 @@ Page({
    */
   onLoad: function(options) {
     this.getCodeImage()
+  },
+  removeValue:function(){
+    console.log("ds")
+    this.setData({
+      phone: "",
+    })
   },
   //获取图片验证码
   getCodeImage: function() {

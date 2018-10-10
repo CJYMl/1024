@@ -62,6 +62,14 @@ Page({
         "img": "img",
         "title": "title"
       },
+      {
+        "img": "img",
+        "title": "title"
+      },
+      {
+        "img": "img",
+        "title": "title"
+      },
     ],
     friendsDynamic: [{
       nickname: "cjy",
@@ -77,6 +85,14 @@ Page({
       "avatar": "avatar",
       "step": '4'
     }, {
+        "nickname": "nickname",
+        "avatar": "avatar",
+        "step": '4'
+      }, {
+        "nickname": "nickname",
+        "avatar": "avatar",
+        "step": '4'
+      },{
       "nickname": "nickname",
       "avatar": "avatar",
       "step": '4'
@@ -88,14 +104,14 @@ Page({
     homeBg: [
       "../../images/home_2@2x.png",
       "../../images/home_4@2x.png",
-      "./img/home_8@2x.png",
-      "./img/home_16@2x.png",
-      "./img/home_32@2x.png",
-      "./img/home_64@2x.png",
-      "./img/home_128@2x.png",
-      "./img/home_256@2x.png",
-      "./img/home_512@2x.png",
-      "./img/home_1024@2x.png",
+      "../img/home_8@2x.png",
+      "../img/home_16@2x.png",
+      "../img/home_32@2x.png",
+      "../img/home_64@2x.png",
+      "../img/home_128@2x.png",
+      "../img/home_256@2x.png",
+      "../img/home_512@2x.png",
+      "../img/home_1024@2x.png",
     ],
     userInfo: {},
     hasUserInfo: false,
@@ -121,15 +137,18 @@ Page({
     showRanking: false,
     isCanPeng: false, //是否能对碰,
     stepNumber:'526',
-    rankingValue:""
+    rankingValue:"",
+    drawTimes:0
   },
   onLoad: function(options) {
+    let { userGameInfo } = this.data
+    console.log(userGameInfo)
     if (wx.getStorageSync("hasVisit")) {
       this.setData({
-        showMask: false,
-        showAuth: false
+        showMask:false,
+        showAuth:false
       })
-   }
+    }
     if (options && options.friendId) {
       console.log("get friendId")
       this.setData({
@@ -140,7 +159,7 @@ Page({
     }
     this.initUserData()
     this.setSystemSize()
-    this.initScratch()
+    //this.initScratch()
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -176,9 +195,10 @@ Page({
       hasUserInfo: true
     })
     let {
-      token
+      token,
+      userGameInfo
     } = this.data
-
+    
     console.log(token)
     //更新用户信息
     let {
@@ -198,9 +218,7 @@ Page({
     }, "post", token).then((res) => {
       if(res.data.retcode == 2000){
         API.getUserInfo({}, "get", token).then((res) => {
-          //console.log(res.data.data)
           if (res.data.retcode == 2000) {
-            console.log(res.data.data)
             that.setData({
               userGameInfo: res.data.data
             })
@@ -229,9 +247,16 @@ Page({
         });
       }
     })
+    
     wx.reLaunch({
       url: '../../pages/guide1/guide1',
     })
+    if (userGameInfo.drawTimes > 0) {
+      this.setData({
+        showMask: true,
+        showScratchTip: true
+      })
+    }
     // wx.navigateTo({
 
     //   url: '/packageA/index/index?friendId=' + this.data.userGameInfo.playId,
@@ -255,43 +280,35 @@ Page({
     } = this.data
     //获取好友动态
     let that = this
-    API.lottery({type:"1"}, "post", token).then((res) => {
+    
+    API.lottery({type:"1"}, "post", token).then((res) => {      
       if (res.data.retcode == 2000) {
+        let { isMember, img, title, drawTimes, status } = this.data.data
+        this.setData({
+          drawTimes
+        })
         that.scratch = new Scratch(that, {
           canvasWidth: windowWidth * 0.72,
           canvasHeight: windowHeight * 0.2,
-          imageResource: res.data.data.img,
+          imageResource: "../../images/record_bg4@2x.png",
           maskColor: 'red',
           r: 15,
-          awardTxt: '中大奖',
-          awardTxtColor: '#ccc',
-          awardTxtFontSize: '24px',
-          callback: () => {
-            wx.showModal({
-              title: '提示',
-              content: `您中奖了`,
-              showCancel: false,
-              success: res => {
-                //this.scratch.reset()
-                if (res.confirm) {
-                  console.log('用户点击确定')
-                } else if (res.cancel) {
-                  console.log('用户点击取消')
-                }
-              }
-            })
-          }
+          isMember: isMember || "1",
+          status: status || "1",
+          img:img || "../../images/card_img02@2x.png",
+          title: title || "2000积分",
+          drawTimes: drawTimes || "0",
         })
-        that.scratch.restart()
+        this.scratch.start()
       } else {
-        wx.showToast({
-          title: res.data.info.msg,
-        })
+        // wx.showToast({
+        //   title: res.data.info.msg,
+        // })
       }
     })
-
-    
-    //this.scratch.start()
+  },
+  resetScratchHandle:function(){
+    this.initScratch()
   },
   closePopWin: function() {
     this.setData({
@@ -366,7 +383,7 @@ Page({
     API.getRanking({}, "get", token).then((res) => {
       if (res.data.retcode == 2000) {
         that.setData({
-          //rankings: res.data.data
+          rankings: res.data.data
         })
       } else {
         wx.showToast({
@@ -379,13 +396,17 @@ Page({
       showRanking: true
     })
   },
+  //开始刮奖
   startScratchHandle: function() {
+    let { userGameInfo} = this.data
     this.closePopWin();
-    this.setData({
-      showScratch: true,
-      showMask: true
-    })
-    this.initScratch()
+    if (userGameInfo.drawTimes > 0){
+      this.setData({
+        showScratch: true,
+        showMask: true
+      })
+      this.initScratch()
+    }
   },
   onShareAppMessage: function(res) {
     if (res.from === 'button') {
@@ -449,7 +470,8 @@ Page({
   },
   //点击砸金蛋
   touchEggHandle: function() {
-    if (this.data.userGameInfo.step != 1024) {
+    let { rankings, userGameInfo} = this.data
+    if (this.data.userGameInfo.step != 1024 || rankings[0].avatar != userGameInfo.avatar ) {
       wx.showModal({
         title: '提示',
         content: `只有到小组第一到达1024才能砸金蛋`,
